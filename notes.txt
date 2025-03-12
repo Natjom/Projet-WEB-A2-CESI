@@ -1,0 +1,40 @@
+1. Accueil (Accessible à tous)
+* Présentation du site et de son objectif
+* Bouton d'inscription / connexion
+* Témoignages d'étudiants / entreprises (optionnel)
+* Statistiques globales (offres disponibles, entreprises partenaires, etc.)
+
+2. Authentification et Gestion des Comptes
+* Connexion / Inscription (Étudiants, Pilotes de promo, Administrateurs)
+* Gestion des rôles et des permissions
+* Récupération de mot de passe
+
+3. Gestion des Offres de Stage
+* Recherche et filtrage avancé (par compétences, entreprise, rémunération...)
+* Consultation des offres (détails, entreprise associée, avis, stats)
+* Ajout / Modification / Suppression (selon rôle)
+* Ajout à la wish-list et suivi des candidatures
+
+4. Gestion des Entreprises
+* Consultation et recherche d’entreprises
+* Ajout / Modification / Suppression (selon rôle)
+* Évaluation des entreprises
+
+5. Gestion des Candidatures
+* Postuler à une offre (téléchargement CV, lettre de motivation)
+* Voir ses candidatures en cours
+* Retirer / annuler une candidature
+
+6. Gestion des Utilisateurs
+* Comptes Étudiants : suivi de recherche de stage, wishlist, candidatures
+* Comptes Pilotes : suivi des étudiants, gestion des offres
+* Administration : gestion des comptes et permissions
+
+7. Statistiques & Dashboard
+* Tableau de bord des stages (par compétences, entreprises, popularité)
+* Suivi des étudiants et leurs recherches (pour les pilotes)
+* Évaluation des entreprises et offres
+
+8. Responsive & Mobile
+* Design adaptatif (desktop / mobile)
+* PWA pour installation mobile
