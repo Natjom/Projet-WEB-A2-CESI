@@ -217,3 +217,98 @@ body {
         display: none;
     }
 }
+
+/* ======== BODY & MAIN ======== */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Le main prend toute la hauteur dispo */
+main {
+    flex: 1;
+}
+
+/* ======== FOOTER ======== */
+footer {
+    background: #1e3a8a;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    gap: 15px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+
+/* ======== STYLES PAGES GÉNÉRIQUES ======== */
+.page-content {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.page-content h1 {
+    font-size: 2.5rem;
+    color: #1e3a8a;
+}
+
+.page-content p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #3b82f6;
+}
+
+/* FORMULAIRE DE CONTACT */
+.contact-form {
+    max-width: 500px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #1e3a8a;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-form button:hover {
+    background: #1e3a8a;
+}
