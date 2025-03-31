@@ -1,0 +1,96 @@
+/* Style général du footer */
+.custom-footer {
+    background-color: #1e3a8a;
+    color: white;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+/* Sections */
+.footer-section {
+    flex: 1 1 30%;
+    min-width: 250px;
+}
+
+.about-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.about-section img {
+    max-width: 120px;
+}
+
+.nav-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nav-section a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+.nav-section a:hover {
+    opacity: 0.8;
+}
+
+.auth-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 200px;
+}
+
+.auth-button {
+    padding: 12px 30px;
+    border: 2px solid white;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s;
+}
+
+.auth-button:hover {
+    background-color: white;
+    color: #1e3a8a;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .footer-content {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .footer-section {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .about-section,
+    .nav-section {
+        align-items: center;
+    }
+}
