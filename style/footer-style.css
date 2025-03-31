@@ -2,7 +2,7 @@
 .custom-footer {
     background-color: #1e3a8a;
     color: white;
-    padding: 40px 20px;
+    padding: 30px 20px 0;
     font-family: Arial, sans-serif;
 }
 
@@ -10,8 +10,8 @@
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 60px;
     flex-wrap: wrap;
 }
@@ -98,39 +98,51 @@
 /* Style personnalisé pour le logo */
 .logo {
     margin-bottom: 15px;
+    text-align: center; /* Centre l'image si nécessaire */
 }
 
+.logo img {
+    max-width: 120px; /* Ajustez la largeur selon votre logo */
+    height: auto;
+    display: block; /* Supprime les espaces inutiles sous l'image */
+}
+
+/* Styles pour le lien contenant le logo */
 .logo-link {
-    color: white;
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: bold;
-    transition: color 0.3s;
+    text-decoration: none; /* Supprime la soulignure */
+    display: inline-block; /* Permet de centrer l'image */
 }
 
-.logo-link:hover {
-    color: #aaa;
-}
-
-/* Mise à jour des médias queries si nécessaire */
+/* Mise à jour des médias queries */
 @media (max-width: 768px) {
     .logo {
-        text-align: center;
         margin-bottom: 20px;
+    }
+
+    .logo img {
+        max-width: 100%; /* Adaptation mobile */
+        height: auto;
     }
 }
 
+/* Styles pour les mentions légales en ligne */
 .footer-container {
     text-align: center;
     padding: 20px;
-    border-top: 1px solid #4a6bcf; /* Nuance de bleu clair */
+    border-top: 1px solid #4a6bcf;
     margin-top: 30px;
+}
+
+.legal-line {
+    display: flex;
+    align-items: center;
+    gap: 30px;
 }
 
 .footer-links ul {
     list-style: none;
     padding: 0;
-    margin: 10px 0 0;
+    margin: 0;
     display: flex;
     gap: 20px;
 }
@@ -143,4 +155,9 @@
 
 .footer-links li a:hover {
     opacity: 1;
+}
+
+.copyright {
+    font-size: 0.9em;
+    opacity: 0.8;
 }

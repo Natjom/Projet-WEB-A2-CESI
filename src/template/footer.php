@@ -1,14 +1,14 @@
 <?php
 // Variables configurables
-$company_name = "SuperStage"; // Mettez le nom souhaité ici
+$company_name = "SuperStage";
 $current_year = date('Y');
-$home_url = "index.php"; // URL de la page d'accueil
+$home_url = "index.php";
+$logo_path = "icons/favicon-96x96.png"; // Mettez le chemin de votre logo ici (ex: "images/logo.png")
 $legal_links = [
     '/mentions-legales' => 'Mentions légales',
     '/politique-confidentialite' => 'Politique de confidentialité'
 ];
 ?>
-
 <style>
     <?php include 'style/footer-style.css'; ?>
 </style>
@@ -17,7 +17,9 @@ $legal_links = [
         <!-- Section À propos -->
         <div class="footer-section about-section">
             <div class="logo">
-                <a href="<?= $home_url ?>" class="logo-link"><?= $company_name ?></a>
+                <a href="<?= $home_url ?>" class="logo-link">
+                    <img src="<?= $logo_path ?>" alt="<?= $company_name ?>">
+                </a>
             </div>
             <p>Plateforme spécialisée dans la connexion entre étudiants et entreprises pour des stages pertinents.</p>
         </div>
@@ -27,10 +29,9 @@ $legal_links = [
             <?php
             $nav_links = [
                 'Accueil' => "$home_url",
-                'Trouver un stage' => '/stages',
-                'Employeurs' => '/employeurs',
-                'Conseils pratiques' => '/blog',
-                'Support' => '/contact'
+                'Trouver un stage' => "offres.php",
+                'Entreprises' => "entreprises.php",
+                'Support' => "help.php",
             ];
 
             foreach($nav_links as $label => $url):
@@ -48,14 +49,16 @@ $legal_links = [
 
     <!-- Section Mentions légales -->
     <div class="footer-container">
-        <p>© <?= $current_year ?> <?= $company_name ?> - Tous droits réservés</p>
-        <nav class="footer-links">
-            <ul>
-                <?php foreach($legal_links as $url => $label): ?>
-                    <li><a href="<?= $url ?>"><?= $label ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
+        <div class="legal-line">
+            <span class="copyright">© <?= $current_year ?> <?= $company_name ?> - Tous droits réservés</span>
+            <nav class="footer-links">
+                <ul>
+                    <?php foreach($legal_links as $url => $label): ?>
+                        <li><a href="<?= $url ?>"><?= $label ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </nav>
+        </div>
     </div>
 
 </footer>
