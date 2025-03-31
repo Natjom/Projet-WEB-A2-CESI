@@ -94,3 +94,28 @@
         align-items: center;
     }
 }
+
+/* Style personnalisé pour le logo */
+.logo {
+    margin-bottom: 15px;
+}
+
+.logo-link {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.logo-link:hover {
+    color: #aaa;
+}
+
+/* Mise à jour des médias queries si nécessaire */
+@media (max-width: 768px) {
+    .logo {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}

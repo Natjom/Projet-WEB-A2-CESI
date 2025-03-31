@@ -2,15 +2,18 @@
 // Variables configurables
 $company_name = "Recherche de stage";
 $current_year = date('Y');
-$logo_path = "logo.png"; // Chemin personnalisable
+$home_url = "index.php"; // URL de la page d'accueil
 ?>
-
+<style>
+    <?php include 'style/footer-style.css'; ?>
+</style>
 <footer class="custom-footer">
     <div class="footer-content">
         <!-- Section À propos -->
         <div class="footer-section about-section">
-            <img src="<?= $logo_path ?>" alt="Logo <?= $company_name ?>">
-            <h3><?= $company_name ?></h3>
+            <div class="logo">
+                <a href="<?= $home_url ?>" class="logo-link"><?= $company_name ?></a>
+            </div>
             <p>Plateforme spécialisée dans la connexion entre étudiants et entreprises pour des stages pertinents.</p>
         </div>
 
