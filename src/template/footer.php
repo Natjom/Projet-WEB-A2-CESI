@@ -1,9 +1,14 @@
 <?php
 // Variables configurables
-$company_name = "Recherche de stage";
+$company_name = "SuperStage"; // Mettez le nom souhaité ici
 $current_year = date('Y');
 $home_url = "index.php"; // URL de la page d'accueil
+$legal_links = [
+    '/mentions-legales' => 'Mentions légales',
+    '/politique-confidentialite' => 'Politique de confidentialité'
+];
 ?>
+
 <style>
     <?php include 'style/footer-style.css'; ?>
 </style>
@@ -21,7 +26,7 @@ $home_url = "index.php"; // URL de la page d'accueil
         <div class="footer-section nav-section">
             <?php
             $nav_links = [
-                'Accueil' => '/accueil',
+                'Accueil' => "$home_url",
                 'Trouver un stage' => '/stages',
                 'Employeurs' => '/employeurs',
                 'Conseils pratiques' => '/blog',
@@ -40,4 +45,17 @@ $home_url = "index.php"; // URL de la page d'accueil
             <a href="/connexion" class="auth-button">Se connecter</a>
         </div>
     </div>
+
+    <!-- Section Mentions légales -->
+    <div class="footer-container">
+        <p>© <?= $current_year ?> <?= $company_name ?> - Tous droits réservés</p>
+        <nav class="footer-links">
+            <ul>
+                <?php foreach($legal_links as $url => $label): ?>
+                    <li><a href="<?= $url ?>"><?= $label ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </nav>
+    </div>
+
 </footer>
