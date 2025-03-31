@@ -2,14 +2,14 @@
 
 <main>
     <section class="hero">
-        <h1>StageConnect</h1>
+        <h1>SuperStage</h1>
         <p>La plateforme qui connecte étudiants et entreprises.</p>
         <a href="#" class="cta-button">Voir les offres</a>
     </section>
 
     <!-- Section Présentation -->
     <section class="about">
-        <h2>Pourquoi choisir StageConnect ?</h2>
+        <h2>Pourquoi choisir SuperStage ?</h2>
         <div class="features">
             <div class="feature">
                 <h3>🎯 Offres ciblées</h3>
