@@ -1,0 +1,149 @@
+
+/* ================= NAVIGATION ================= */
+
+/* Navbar classique (affichée sur PC) */
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Mobile : cacher la navbar classique et afficher le menu burger */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .burger {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+    }
+
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature {
+        width: 80%;
+    }
+}
+
+/* PC : masquer le menu burger */
+@media (min-width: 769px) {
+    .menu {
+        display: none;
+    }
+
+    .burger {
+        display: none;
+    }
+}
+
+
+/* ================= CONNEXION ================= */
+
+.hidden {
+    display: none;
+}
+
+.login-container {
+    text-align: center;
+}
+
+.login-container h2 {
+    color: black;
+    font-weight: bold;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+.login-links {
+    margin-top: 15px; /* Ajoute un peu d'espace au-dessus */
+}
+
+.login-container a,
+.login-links a {
+    margin: 8px 0;
+    color: #007BFF;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-container a:hover,
+.login-links a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* ================= PANNEAU DE CONNEXION ================= */
+
+.login-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.login-panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+    display: none;
+}
+
+.login-panel.show {
+    display: block;
+}
+
+/* Bouton de fermeture */
+#close-login {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}

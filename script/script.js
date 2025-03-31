@@ -30,23 +30,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener("DOMContentLoaded", function () {
     const loginPanel = document.getElementById("login-panel");
-    const loginButton = document.querySelector(".nav-links li:nth-child(3) a");
+    const loginButton = document.querySelector(".login-trigger");
     const closeLogin = document.getElementById("close-login");
 
-    // Ouvrir le panneau au clic sur "Connexion"
-    loginButton.addEventListener("click", function () {
-        loginPanel.classList.remove("hidden");
+    // Ouvrir / Fermer le panneau au clic sur "Connexion"
+    loginButton.addEventListener("click", function (e) {
+        e.preventDefault(); // Empêche le saut en haut de page
+        loginPanel.classList.toggle("show");
     });
 
     // Fermer le panneau au clic sur la croix
     closeLogin.addEventListener("click", function () {
-        loginPanel.classList.add("hidden");
+        loginPanel.classList.remove("show");
     });
 
-    // Fermer en cliquant en dehors du panneau
-    window.addEventListener("click", function (e) {
-        if (e.target === loginPanel) {
-            loginPanel.classList.add("hidden");
+    // Fermer si on clique en dehors
+    document.addEventListener("click", function (e) {
+        if (!loginPanel.contains(e.target) && e.target !== loginButton) {
+            loginPanel.classList.remove("show");
         }
     });
 });
+
