@@ -41,19 +41,19 @@
 
 <header>
     <nav class="navbar">
-            <div class="logo"><a href="index.php">SuperStage</a></div>
-
+            <div class="logo"><a href="/SuperStage/index.php">SuperStage</a></div>
+<!--        <div class="logo"><a href="index.php">SuperStage</a></div>-->
         <!-- Navbar classique pour PC -->
         <ul class="nav-links">
-            <li><a href="offres.php">Offres de stage</a></li>
-            <li><a href="entreprises.php">Entreprises</a></li>
+            <li><a href="/SuperStage/src/offres.php">Offres de stage</a></li>
+            <li><a href="/SuperStage/src/entreprises.php">Entreprises</a></li>
             <li class="login-wrapper">
                 <a href="#" class="login-trigger">Connexion</a>
                 <div id="login-panel" class="login-panel hidden">
                     <div class="login-container">
                         <span id="close-login">&times;</span>
                         <h2>Connexion</h2>
-                        <form action="login.php" method="POST">
+                        <form action="/SuperStage/src/login.php" method="POST">
                             <label>
                                 <input type="text" name="username" placeholder="Identifiant" required>
                             </label>
@@ -63,8 +63,8 @@
                             <button type="submit">Se connecter</button>
                         </form>
                         <div class="login-links">
-                            <a href="forgot-password.php">Mot de passe oublié ?</a>
-                            <a href="register.php">Inscription</a>
+                            <a href="/SuperStage/src/forgot-password.php">Mot de passe oublié ?</a>
+                            <a href="/SuperStage/src/register.php">Inscription</a>
                         </div>
                     </div>
                 </div>
@@ -101,8 +101,8 @@
     <!-- Menu déroulant -->
     <div class="menu">
         <ul>
-            <li><a href="offres.php">Offres de stage</a></li>
-            <li><a href="entreprises.php">Entreprises</a></li>
+            <li><a href="/SuperStage/src/offres.php">Offres de stage</a></li>
+            <li><a href="/SuperStage/src/entreprises.php">Entreprises</a></li>
             <li><a href="#" class="login-trigger">Connexion</a></li>
         </ul>
     </div>

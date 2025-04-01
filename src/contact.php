@@ -1,4 +1,4 @@
-<?php include __DIR__ . "/template/header.php"; ?>
+<?php include __DIR__ . "/SuperStage/src/template/header.php"; ?>
 
 <main>
     <section class="page-content">
@@ -19,4 +19,4 @@
     </section>
 </main>
 
-<?php include __DIR__ . "/template/footer.php"; ?>
+<?php include __DIR__ . "/SuperStage/src/template/footer.php"; ?>

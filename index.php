@@ -1,10 +1,10 @@
-<?php include __DIR__ . "/template/header.php"; ?>
+<?php include __DIR__ . "/src/template/header.php"; ?>
 
 <main>
     <section class="hero">
         <h1>SuperStage</h1>
         <p>La plateforme qui connecte étudiants et entreprises.</p>
-        <a href="#" class="cta-button">Voir les offres</a>
+        <a href="/SuperStage/src/offres.php" class="cta-button">Voir les offres</a>
     </section>
 
     <!-- Section Présentation -->
@@ -27,4 +27,4 @@
     </section>
 </main>
 
-<?php include __DIR__ . "/template/footer.php"; ?>
+<?php include __DIR__ . "/src/template/footer.php"; ?>
