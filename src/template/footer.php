@@ -3,14 +3,14 @@
 $company_name = "SuperStage";
 $current_year = date('Y');
 $home_url = "index.php";
-$logo_path = "icons/favicon-96x96.png"; // Mettez le chemin de votre logo ici (ex: "images/logo.png")
+$logo_path = "/icons/favicon-96x96.png"; // Mettez le chemin de votre logo ici (ex: "images/logo.png")
 $legal_links = [
     '/mentions-legales' => 'Mentions légales',
     '/politique-confidentialite' => 'Politique de confidentialité'
 ];
 ?>
 <style>
-    <?php include 'style/footer-style.css'; ?>
+    <?php include 'style/footer.css'; ?>
 </style>
 <footer class="custom-footer">
     <div class="footer-content">
@@ -42,8 +42,8 @@ $legal_links = [
 
         <!-- Section Authentification -->
         <div class="footer-section auth-section">
-            <a href="/inscription" class="auth-button">Inscription</a>
-            <a href="/connexion" class="auth-button">Se connecter</a>
+            <a href="register.php" class="auth-button">Inscription</a>
+            <a href="login.php" class="auth-button">Se connecter</a>
         </div>
     </div>
 

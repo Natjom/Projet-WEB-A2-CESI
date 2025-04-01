@@ -3,8 +3,6 @@ CREATE DATABASE projetweb;
 USE projetweb;
 
 
- 
- 
  CREATE TABLE Secteur_activite(
       IdSec INT AUTO_INCREMENT,
       Secteur_Act VARCHAR(200),

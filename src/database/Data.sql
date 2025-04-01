@@ -1,4 +1,4 @@
-INSERT INTO region (reg) 
+INSERT INTO region (reg)
 VALUES 
 ('Auvergne-Rhône-Alpes'),
 ('Bourgogne-Franche-Comté'),

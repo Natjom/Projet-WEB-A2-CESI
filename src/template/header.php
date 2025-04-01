@@ -26,14 +26,11 @@
     <meta name="apple-mobile-web-app-title" content="SuperStage" />
     <link rel="manifest" href="/icons/site.webmanifest" />
 
-    <!-- Liens vers les fichiers CSS -->
-    <link rel="stylesheet" href="/style/styles.css">
-    <link rel="stylesheet" href="/style/navbar.css">
-
     <!-- Script JavaScript -->
-    <script defer src="/script/script.js"></script>
-
-
+    <script defer src="/script/loader.js"></script>
+    <script defer src="/script/login.js"></script>
+    <script defer src="/script/menu.js"></script>
+    <script defer src="/script/settings.js"></script>
 </head>
 
 
