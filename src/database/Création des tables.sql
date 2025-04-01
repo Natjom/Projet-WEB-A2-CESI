@@ -1,8 +1,6 @@
 DROP DATABASE IF EXISTS projetweb;
 CREATE DATABASE projetweb;
 USE projetweb;
-
-
  
  
  CREATE TABLE Secteur_activite(
@@ -183,6 +181,13 @@ USE projetweb;
       FOREIGN KEY(IDComp) REFERENCES Competences(IDComp)
    );
 
+ -- Création de l'utilisateur Admin
+CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'Mdp@2024!';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
+
+
  -- Création de l'utilisateur pilote
 CREATE USER IF NOT EXISTS 'pilote'@'localhost' IDENTIFIED BY 'Pilote@123';
 GRANT SELECT ON projetweb.* TO 'pilote'@'localhost';
@@ -205,6 +210,8 @@ GRANT UPDATE, DELETE, INSERT ON projetweb.Evalue TO 'pilote'@'localhost';
 -- Création de l'utilisateur étudiant
 CREATE USER IF NOT EXISTS 'etudiant'@'localhost' IDENTIFIED BY 'Etudiant@123';
 GRANT SELECT ON projetweb.* TO 'etudiant'@'localhost';
-GRANT INSERT, UPDATE, DELETE ON projetweb.Evalue TO 'etudiant'@'localhost';
 GRANT INSERT, UPDATE, DELETE ON projetweb.souhaite TO 'etudiant'@'localhost';
 GRANT INSERT, UPDATE, DELETE ON projetweb.Candidature TO 'etudiant'@'localhost';
+
+
+

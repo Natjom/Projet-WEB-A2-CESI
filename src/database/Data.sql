@@ -57,11 +57,14 @@ VALUES
 ('1 Avenue des Amoureux', NULL, 5),
 ('7 Boulevard du Centre', NULL, 1);
 
-INSERT INTO Utilisateur (IDu, MdpU, NomU, PrenomU, Date_NaisU, MailU, role, ID_adresse) VALUES
-(1, '12345a', 'Do1e', 'John', '1990-05-15', 'john.doe@gmail.com', 'Etudiant',1),
-(2, '12345b', 'Smith', 'Alice', '1985-09-21', 'alice.smith@gmail.com', 'Administrateur',2),
-(3, '12345c', 'Johnson', 'Michael', '1982-03-10', 'michael.johnson@gmail.com', 'Etudiant',3),
-(6, '12345d', 'Jones', 'David', '1979-11-18', 'david.jones@gmail.com', 'Pilote',6);
+INSERT INTO Users (IDu, MdpU, NomU, PrenomU, Date_NaisU, MailU, role, ID_adresse) VALUES
+(1, '12345a', 'Do1e', 'John', '1990-05-15', 'john.doe@gmail.com', 'Etudiant', 1),
+(2, '12345b', 'Smith', 'Alice', '1985-09-21', 'alice.smith@gmail.com', 'Administrateur', 2),
+(3, '12345c', 'Johnson', 'Michael', '1982-03-10', 'michael.johnson@gmail.com', 'Etudiant', 3),
+(4, '12345e', 'Davis', 'Emma', '1995-07-12', 'emma.davis@gmail.com', 'Etudiant', 4),
+(5, '12345f', 'Brown', 'Liam', '1993-11-30', 'liam.brown@gmail.com', 'Etudiant', 5),
+(6, '12345d', 'Jones', 'David', '1979-11-18', 'david.jones@gmail.com', 'Pilote', 6);
+
 
 INSERT INTO promotion (Promotion) 
 VALUES 
@@ -73,8 +76,7 @@ VALUES
 
 INSERT INTO pilote(IDu)
 VALUES
-(6),
-(13);
+(6);
 
 INSERT INTO Admin(IDu)
 VALUES 
@@ -83,26 +85,18 @@ VALUES
 INSERT INTO Classe(idv, IDT, IDProm,IDu)
 VALUES
 (5,1,2,6),
-(1,2,3,13),
-(5,2,1,6),
-(2,1,1,13);
+(5,2,1,6);
 
 INSERT INTO etudiant (IDu, IDClasse) 
-VALUES 
-(4, 1),
-(1, 1),
-(3, 2),
-(5, 1),
-(7, 2),
-(8, 3),
-(9, 3),
-(10, 3),
-(11, 2),
-(12, 4),
-(14, 4),
-(15, 2);
+VALUES  
+(1, 1),  -- John Doe (Etudiant)
+(3, 2),  -- Michael Johnson (Etudiant)
+(4, 2),  -- Emma Davis (Etudiant)
+(5, 1);  -- Liam Brown (Etudiant)
 
-INSERT INTO Secteur_Activite (Secteur_Act) VALUES
+
+
+INSERT INTO Secteur_activite (Secteur_Act) VALUES
 ('Marketing'),
 ('Informatique'),
 ('Finance'),
@@ -134,15 +128,16 @@ VALUES
 ('Réseaux sociaux'),
 ('Analyse de données');
 
-INSERT INTO Offre (Duree, Poste, remune, Date_Stage, Nb_place, Descr, IDE) 
-VALUES 
-(3, 'Développeur Full-stack', 800, '2024-04-15', 5, 'Développeur Full-stack pour projet e-commerce.', 1),
-(6, 'Analyste financier junior', 1200, '2024-05-20', 3, "Recherche d'un analyste financier junior pour notre équipe.", 2),
-(4, 'Ingénieur en biotechnologie', 1000, '2024-06-10', 2, "Poste d'ingénieur en biotechnologie pour développement de nouveaux médicaments.", 3),
-(5, 'Chargé de marketing digital', 900, '2024-07-01', 4, 'Chargé de marketing digital pour campagnes publicitaires innovantes.', 4),
-(3, 'Front-end DEV', 650, '2024-06-10', 2, 'Déceloppeur Front-end pour un site web', 1);
+INSERT INTO Offre (Poste, remune, Date_debutO, Date_finO, Nb_place, Descr, IDE)  
+VALUES  
+('Développeur Full-stack', 800, '2024-04-15', '2024-07-15', 5, 'Développeur Full-stack pour projet e-commerce.', 1),  
+('Analyste financier junior', 1200, '2024-05-20', '2024-11-20', 3, "Recherche d'un analyste financier junior pour notre équipe.", 2),  
+('Ingénieur en biotechnologie', 1000, '2024-06-10', '2024-12-10', 2, "Poste d'ingénieur en biotechnologie pour développement de nouveaux médicaments.", 3),  
+('Chargé de marketing digital', 900, '2024-07-01', '2024-10-01', 4, 'Chargé de marketing digital pour campagnes publicitaires innovantes.', 4),  
+('Front-end DEV', 650, '2024-06-10', '2024-09-10', 2, 'Développeur Front-end pour un site web.', 1);  
 
-INSERT INTO necessite(IDoffre, IDComp)
+
+INSERT INTO Posseder(IDoffre, IDComp)
 VALUES 
 (1,1),
 (1,2),
@@ -169,18 +164,24 @@ VALUES
 (3, 2),
 (4, 1);
 
-INSERT INTO note(IDu, NoteU, IDE)
-VALUES
-(11, 3, 1),
-(12, 3, 1),
-(14, 5, 3),
-(15, 2, 4);
+INSERT INTO Evalue (IDu, Note, IDE) VALUES
+(2, 4, 1),  -- Alice Smith (Administrateur)
+(2, 5, 2),  -- Alice Smith (Administrateur) 
+(2, 3, 3),  -- Alice Smith (Administrateur) 
+(6, 2, 1),  -- David Jones (Pilote) 
+(6, 4, 3),  -- David Jones (Pilote) 
+(6, 3, 2);  -- David Jones (Pilote) 
 
-INSERT INTO postuler(IDu,IDoffre)
+
+
+
+INSERT INTO Candidature(IDu,IDoffre)
 VALUES 
-(11,1),
-(12,2);
+(1,1),
+(3,2),
+(4,3),
+(5,4);
 
-INSERT INTO interesser(IDu,IDoffre)
+INSERT INTO souhaite(IDu,IDoffre)
 VALUES
-(11,1);
+(1,1);
