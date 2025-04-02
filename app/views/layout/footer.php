@@ -27,7 +27,7 @@ $legal_links = [
             $nav_links = [
                 'Accueil' => "$home_url",
                 'Trouver un stage' => "offres.php",
-                'Entreprises' => "entreprises.php",
+                'Entreprises' => "entreprise.php",
                 'Support' => "help.php",
             ];
 

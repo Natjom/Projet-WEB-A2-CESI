@@ -27,7 +27,7 @@
 <!--    <link rel="manifest" href="/icons/site.webmanifest" />-->
 
     <!-- Script JavaScript -->
-    <script defer src="/assets/js/login-panel.js"></script>
+    <script defer src="/public/assets/js/login-panel.js"></script>
     <script defer src="/public/assets/js/settings.js"></script>
 
 </head>
@@ -80,7 +80,13 @@
                                 <option value="light">Clair</option>
                                 <option value="dark">Sombre</option>
                             </select>
-                            <button type="button">Sauvegarder</button>
+                            <label for="role">Rôle (temporaire) :</label>
+                            <select id="role">
+                                <option value="Administrateur">Administrateur</option>
+                                <option value="Pilote">Pilote</option>
+                                <option value="Etudiant">Etudiant</option>
+                            </select>
+                            <button type="button" id="save-settings">Sauvegarder</button>
                         </form>
                     </div>
                 </div>

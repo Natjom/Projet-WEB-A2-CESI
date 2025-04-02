@@ -4,12 +4,12 @@
 ?>
 
     <head>
-        <link rel="stylesheet" href="/assets/css/styles.css">
-        <link rel="stylesheet" href="/assets/css/navbar.css">
-        <link rel="stylesheet" href="/assets/css/footer.css">
+        <link rel="stylesheet" href="/../assets/css/styles.css">
+        <link rel="stylesheet" href="/../assets/css/navbar.css">
+        <link rel="stylesheet" href="/../assets/css/footer.css">
         <title>Liste des entreprises</title>
     </head>
-<?php include __DIR__ . "/../template/header.php"; ?>
+<?php include __DIR__ . "/../views/layout/header.php"; ?>
 
     <main class="container">
         <h1>Liste des entreprises</h1>
@@ -93,7 +93,7 @@
         // Récupération du terme de recherche
         $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-        // Filtrage des entreprises (simulation de la requête SQL)
+        // Filtrage des entreprise (simulation de la requête SQL)
         if (!empty($search)) {
             $searchTerm = '%' . $search . '%';
             $filteredCompanies = array_filter($companies, function ($company) use ($searchTerm) {
@@ -141,4 +141,4 @@
         <?php endif; ?>
     </main>
 
-<?php include __DIR__ . "/../template/footer.php"; ?>
+<?php include __DIR__ . "/../views/layout/footer.php"; ?>
