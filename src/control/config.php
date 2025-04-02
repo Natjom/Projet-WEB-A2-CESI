@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'ton_database';
+$dbname = 'projetweb';
 $user = 'root';
 $pass = '';
 

@@ -1,3 +1,5 @@
+USE projetweb;
+
 INSERT INTO region (reg)
 VALUES 
 ('Auvergne-Rhône-Alpes'),

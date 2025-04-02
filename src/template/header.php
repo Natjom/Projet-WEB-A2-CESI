@@ -24,13 +24,14 @@
     <link rel="shortcut icon" href="/icons/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="SuperStage" />
-    <link rel="manifest" href="/icons/site.webmanifest" />
+<!--    <link rel="manifest" href="/icons/site.webmanifest" />-->
 
     <!-- Script JavaScript -->
-    <script defer src="/script/loader.js"></script>
     <script defer src="/script/login.js"></script>
     <script defer src="/script/menu.js"></script>
     <script defer src="/script/settings.js"></script>
+    <script type="module" src="/script/auth.js"></script>
+
 </head>
 
 
@@ -50,7 +51,7 @@
                     <div class="login-container">
                         <span id="close-login">&times;</span>
                         <h2>Connexion</h2>
-                        <form action="/SuperStage/src/login.php" method="POST">
+                        <form id="login-form" method="POST">
                             <label>
                                 <input type="text" name="username" placeholder="Identifiant" required>
                             </label>
@@ -58,6 +59,7 @@
                                 <input type="password" name="password" placeholder="Mot de passe" required>
                             </label>
                             <button type="submit">Se connecter</button>
+                            <p id="login-error" style="color: red;"></p>
                         </form>
                         <div class="login-links">
                             <a href="/SuperStage/src/forgot-password.php">Mot de passe oublié ?</a>

@@ -1,48 +1,70 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
+    const loginTrigger = document.querySelector(".login-trigger");
     const loginPanel = document.getElementById("login-panel");
-    const loginButton = document.querySelector(".login-trigger");
     const closeLogin = document.getElementById("close-login");
     const loginForm = document.getElementById("login-form");
     const loginError = document.getElementById("login-error");
-    const logoutButton = document.getElementById("logout");
 
-    if (loginButton) {
-        loginButton.addEventListener("click", function (e) {
+    // Afficher ou masquer le panneau de connexion
+    if (loginTrigger) {
+        loginTrigger.addEventListener("click", (e) => {
             e.preventDefault();
             loginPanel.classList.toggle("show");
         });
+    }
 
-        closeLogin.addEventListener("click", function () {
+    // Fermer le panneau de connexion
+    if (closeLogin) {
+        closeLogin.addEventListener("click", () => {
             loginPanel.classList.remove("show");
         });
     }
 
-    // Vérification en BDD et connexion
-    loginForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const formData = new FormData(loginForm);
-
-        fetch("login.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    location.reload(); // Recharge la page si succès
-                } else {
-                    loginError.textContent = data.message;
-                }
-            })
-            .catch(error => console.error("Erreur:", error));
+    // Fermer le panneau si on clique en dehors du panneau de connexion
+    document.addEventListener("click", (e) => {
+        if (!loginPanel.contains(e.target) && !loginTrigger.contains(e.target)) {
+            loginPanel.classList.remove("show");
+        }
     });
 
-    // Déconnexion
-    if (logoutButton) {
-        logoutButton.addEventListener("click", function () {
-            fetch("logout.php")
-                .then(response => response.json())
-                .then(() => location.reload()); // Recharge la page après déconnexion
+    // Soumettre le formulaire de connexion
+    if (loginForm) {
+        loginForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(loginForm);
+
+            console.log("Tentative de connexion avec :", Object.fromEntries(formData));
+
+            try {
+                const response = await fetch("/SuperStage/src/login/login.php", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                console.log("Statut de la réponse HTTP :", response.status);
+
+                const text = await response.text();  // Récupère la réponse brute
+                console.log("Réponse brute du serveur :", text);
+
+                try {
+                    const data = JSON.parse(text); // Tente de parser en JSON
+                    console.log("Réponse JSON parsée :", data);
+
+                    if (data.success) {
+                        console.log("Connexion réussie !");
+                        location.reload();
+                    } else {
+                        console.warn("Erreur de connexion :", data.message);
+                        loginError.textContent = data.message;
+                    }
+                } catch (jsonError) {
+                    console.error("Erreur de parsing JSON :", jsonError);
+                    console.error("Contenu reçu (non JSON) :", text);
+                }
+
+            } catch (error) {
+                console.error("Erreur lors de la requête :", error);
+            }
         });
     }
 });
