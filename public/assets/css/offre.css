@@ -1,0 +1,32 @@
+/* Espacement interne pour la section de l'offre */
+.offre-container {
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+/* Espacement entre les détails de l'offre (lieu, durée, etc.) */
+.offre-container .detail {
+    margin-bottom: 1rem;
+}
+
+/* Espacement pour les listes (compétences, contact) */
+.contacts li,
+.offre-container ul li {
+    margin-bottom: 0.8rem;
+}
+
+/* Espacement entre les titres et les contenus */
+h3 {
+    margin-top: 1.5rem; /* Espacement après les titres */
+}
+
+.btn-postuler {
+    background: #1a73e8;
+    color: white;
+    margin-top: 8px;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
