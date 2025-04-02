@@ -4,9 +4,10 @@
 ?>
 
     <head>
-        <link rel="stylesheet" href="/../assets/css/styles.css">
-        <link rel="stylesheet" href="/../assets/css/navbar.css">
-        <link rel="stylesheet" href="/../assets/css/footer.css">
+        <link rel="stylesheet" href="/public/assets/css/styles.css">
+        <link rel="stylesheet" href="/public/assets/css/navbar.css">
+        <link rel="stylesheet" href="/public/assets/css/footer.css">
+        <link rel="stylesheet" href="/public/assets/css/list-entreprises.css">
         <title>Liste des entreprises</title>
     </head>
 <?php include __DIR__ . "/../views/layout/header.php"; ?>
@@ -17,7 +18,7 @@
         <!-- Formulaire de recherche -->
         <form method="GET" class="search-form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <label for="search-input">Rechercher une entreprise :</label>
-            <input type="text" id="search-input" name="search" placeholder="Exemple : Nom ou secteur..." value="<?= htmlspecialchars(isset($_GET['search']) ? $_GET['search'] : '') ?>">
+            <input type="text" id="search-input" name="search" placeholder="Exemple : Nom ou secteur..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
             <button type="submit">Rechercher</button>
         </form>
 
@@ -91,7 +92,7 @@
         ];
 
         // Récupération du terme de recherche
-        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $search = $_GET['search'] ?? '';
 
         // Filtrage des entreprise (simulation de la requête SQL)
         if (!empty($search)) {
