@@ -27,7 +27,7 @@
 <!--    <link rel="manifest" href="/icons/site.webmanifest" />-->
 
     <!-- Script JavaScript -->
-    <script defer src="/public/assets/js/login.js"></script>
+    <script defer src="/assets/js/login-panel.js"></script>
     <script defer src="/public/assets/js/settings.js"></script>
 
 </head>
@@ -37,12 +37,12 @@
 
 <header>
     <nav class="navbar">
-            <div class="logo"><a href="/SuperStage/index.php">SuperStage</a></div>
+            <div class="logo"><a href="/SuperStage/public/index.php">SuperStage</a></div>
 <!--        <div class="logo"><a href="index.php">SuperStage</a></div>-->
         <!-- Navbar classique pour PC -->
         <ul class="nav-links">
-            <li><a href="/SuperStage/src/offres.php">Offres de stage</a></li>
-            <li><a href="/SuperStage/src/entreprises.php">Entreprises</a></li>
+            <li><a href="/SuperStage/app/views/offres.php">Offres de stage</a></li>
+            <li><a href="/SuperStage/app/views/entreprises.php">Entreprises</a></li>
             <li class="login-wrapper">
                 <a href="#" class="login-trigger">Connexion</a>
                 <div id="login-panel" class="login-panel hidden">
@@ -60,8 +60,8 @@
                             <p id="login-error" style="color: red;"></p>
                         </form>
                         <div class="login-links">
-                            <a href="/SuperStage/src/forgot-password.php">Mot de passe oublié ?</a>
-                            <a href="/SuperStage/src/register.php">Inscription</a>
+                            <a href="/SuperStage/app/views/forgot-password.php">Mot de passe oublié ?</a>
+                            <a href="/SuperStage/app/views/register.php">Inscription</a>
                         </div>
                     </div>
                 </div>
@@ -98,8 +98,8 @@
     <!-- Menu déroulant -->
     <div class="menu">
         <ul>
-            <li><a href="/SuperStage/src/offres.php">Offres de stage</a></li>
-            <li><a href="/SuperStage/src/entreprises.php">Entreprises</a></li>
+            <li><a href="/app/views/offres.php">Offres de stage</a></li>
+            <li><a href="/app/views/entreprises.php">Entreprises</a></li>
             <li><a href="#" class="login-trigger">Connexion</a></li>
         </ul>
     </div>

@@ -4,9 +4,9 @@
 ?>
 
     <head>
-        <link rel="stylesheet" href="/public/assets/css/styles.css">
-        <link rel="stylesheet" href="/public/assets/css/navbar.css">
-        <link rel="stylesheet" href="/public/assets/css/footer.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <link rel="stylesheet" href="/assets/css/navbar.css">
+        <link rel="stylesheet" href="/assets/css/footer.css">
         <title>Liste des entreprises</title>
     </head>
 <?php include __DIR__ . "/../template/header.php"; ?>
@@ -110,7 +110,7 @@
             <div class="companies-list">
                 <?php foreach ($filteredCompanies as $company): ?>
                     <div class="company-banner">
-                        <a href="entreprise.php?id=<?= htmlspecialchars($company['id']) ?>" class="banner-link">
+                        <a href="../models/entreprise.php?id=<?= htmlspecialchars($company['id']) ?>" class="banner-link">
                             <div class="banner-content">
                                 <!-- Logo à gauche -->
                                 <img src="<?= htmlspecialchars($company['logo']) ?>"

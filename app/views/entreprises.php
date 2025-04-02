@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="/public/assets/css/navbar.css">
     <link rel="stylesheet" href="/public/assets/css/footer.css">
 </head>
-<?php include __DIR__ . "/template/header.php"; ?>
+<?php include __DIR__ . "/layout/header.php"; ?>
 
 
 <main>
@@ -13,4 +13,4 @@
     </section>
 </main>
 
-<?php include __DIR__ . "/template/footer.php"; ?>
+<?php include __DIR__ . "/layout/footer.php"; ?>
