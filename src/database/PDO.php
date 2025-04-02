@@ -14,7 +14,7 @@ class Sql
         {
             case "Administrateur":
                 $user = "admin";
-                $password = "mdp2";
+                $password = "Mdp@2024!";
                 break;
             
             case "Pilote":
@@ -28,9 +28,11 @@ class Sql
                 break;
             
             default:
+                error_log("Niveau de sécurité inconnu : $Security_level. Connexion en tant qu'étudiant par défaut.");
                 $user = "etudiant";
-                $password = "mdp";
+                $password = "Etudiant@123";
                 break;
+            
         }
 
         // Connexion à la base de données projetweb
@@ -50,7 +52,7 @@ class Sql
         $get = $this->connexion->prepare($sql);
         $get->execute();
         $result = $get->fetchAll();
-        return $result[0]; // Retourne la première ligne
+        return $result[0] ?? null; // Retourne la première ligne
     }
 
     // Récupère le premier enregistrement sous forme d'objet PDO
@@ -84,10 +86,10 @@ class Sql
     public function Add($sql) {
         try {
             $insert = $this->connexion->exec($sql);
-            return ($insert); // Retourne le nombre de lignes affectées
-        } catch (Exception $e) {
-            echo "Problème de connexion à la base de données...";
-            die();
+            return $insert; // Retourne le nombre de lignes affectées
+        } catch (PDOException $e) {
+            error_log("Erreur d'insertion : " . $e->getMessage());
+            return false; 
         }
     }
 
@@ -95,10 +97,10 @@ class Sql
     public function Delete($sql) {
         try {
             $delete = $this->connexion->exec($sql);
-            return ($delete); // Retourne le nombre de lignes supprimées
-        } catch (Exception $e) {
-            echo "Problème de connexion à la base de données... " . $e->getMessage();
-            die();
+            return $delete;
+        } catch (PDOException $e) {
+            error_log("Erreur de suppression : " . $e->getMessage());
+            return false;
         }
     }
 
@@ -106,10 +108,10 @@ class Sql
     public function Update($sql) {
         try {
             $update = $this->connexion->exec($sql);
-            return ($update); // Retourne le nombre de lignes affectées
-        } catch (Exception $e) {
-            echo "Problème de connexion à la base de données... " . $e->getMessage();
-            die();
+            return $update;
+        } catch (PDOException $e) {
+            error_log("Erreur de mise à jour : " . $e->getMessage());
+            return false;
         }
     }
 }
