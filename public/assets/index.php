@@ -1,9 +1,9 @@
 <head>
-    <link rel="stylesheet" href="/style/styles.css">
-    <link rel="stylesheet" href="/style/navbar.css">
-    <link rel="stylesheet" href="/style/footer.css">
+    <link rel="stylesheet" href="/public/assets/css/styles.css">
+    <link rel="stylesheet" href="/public/assets/css/navbar.css">
+    <link rel="stylesheet" href="/public/assets/css/footer.css">
 </head>
-<?php include __DIR__ . "/src/template/header.php"; ?>
+<?php include __DIR__ . "/../../app/views/layout/header.php"; ?>
 
 <main>
     <section class="hero">
@@ -32,4 +32,4 @@
     </section>
 </main>
 
-<?php include __DIR__ . "/src/template/footer.php"; ?>
+<?php include __DIR__ . "/../../app/views/layout/footer.php"; ?>

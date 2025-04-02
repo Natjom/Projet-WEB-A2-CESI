@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(data => {
                     if (data.success) {
                         // Si la connexion réussit, rediriger l'utilisateur
-                        window.location.href = '/SuperStage/index.php';
+                        window.location.href = '../index.php';
                     } else {
                         // Afficher un message d'erreur si la connexion échoue
                         loginError.textContent = data.message;

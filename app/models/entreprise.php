@@ -1,7 +1,7 @@
 <head>
-    <link rel="stylesheet" href="/style/styles.css">
-    <link rel="stylesheet" href="/style/navbar.css">
-    <link rel="stylesheet" href="/style/footer.css">
+    <link rel="stylesheet" href="/public/assets/css/styles.css">
+    <link rel="stylesheet" href="/public/assets/css/navbar.css">
+    <link rel="stylesheet" href="/public/assets/css/footer.css">
 </head>
 <?php include __DIR__ . "/../template/header.php"; ?>
 

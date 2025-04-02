@@ -19,16 +19,16 @@
     <meta name="twitter:image" content="/icons/favicon-96x96.png">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
-    <link rel="shortcut icon" href="/icons/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/public/assets/img/icons/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/public/assets/img/icons/favicon.svg" />
+    <link rel="shortcut icon" href="/public/assets/img/icons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/img/icons/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="SuperStage" />
 <!--    <link rel="manifest" href="/icons/site.webmanifest" />-->
 
     <!-- Script JavaScript -->
-    <script defer src="/script/login.js"></script>
-    <script defer src="/script/settings.js"></script>
+    <script defer src="/public/assets/js/login.js"></script>
+    <script defer src="/public/assets/js/settings.js"></script>
 
 </head>
 
@@ -68,7 +68,7 @@
             </li>
             <li class="settings-wrapper">
                 <a href="#" class="settings-trigger">
-                    <img src="/icons/param.png" alt="Paramètres" class="settings-icon">
+                    <img src="/public/assets/img/icons/param.png" alt="Paramètres" class="settings-icon">
                 </a>
                 <div id="settings-panel" class="settings-panel hidden">
                     <div class="settings-container">
