@@ -1,4 +1,9 @@
-<?php include __DIR__ . "/SuperStage/src/template/header.php"; ?>
+<head>
+    <link rel="stylesheet" href="/style/styles.css">
+    <link rel="stylesheet" href="/style/navbar.css">
+    <link rel="stylesheet" href="/style/footer.css">
+</head>
+<?php include __DIR__ . "/template/header.php"; ?>
 
 <main>
     <section class="page-content">
