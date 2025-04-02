@@ -53,7 +53,7 @@
                         <h2>Connexion</h2>
                         <form id="login-form" method="POST">
                             <label>
-                                <input type="text" name="username" placeholder="Identifiant" required>
+                                <input type="text" name="email" placeholder="Identifiant" required>
                             </label>
                             <label>
                                 <input type="password" name="password" placeholder="Mot de passe" required>

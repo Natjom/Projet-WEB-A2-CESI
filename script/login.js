@@ -60,10 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 } catch (jsonError) {
                     console.error("Erreur de parsing JSON :", jsonError);
                     console.error("Contenu reçu (non JSON) :", text);
+                    loginError.textContent = "Erreur interne du serveur. Veuillez réessayer.";
                 }
 
             } catch (error) {
                 console.error("Erreur lors de la requête :", error);
+                loginError.textContent = "Erreur lors de la requête. Veuillez réessayer.";
             }
         });
     }

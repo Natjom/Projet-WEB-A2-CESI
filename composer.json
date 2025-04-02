@@ -1,5 +1,5 @@
 {
-  "name": "SuperStage",
+  "name": "superstage/project",
   "description": "Un projet web PHP",
   "type": "project",
   "autoload": {
