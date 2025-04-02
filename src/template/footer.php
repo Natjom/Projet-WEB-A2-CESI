@@ -9,9 +9,6 @@ $legal_links = [
     '/politique-confidentialite' => 'Politique de confidentialité'
 ];
 ?>
-<style>
-    <?php include 'style/footer.css'; ?>
-</style>
 <footer class="custom-footer">
     <div class="footer-content">
         <!-- Section À propos -->

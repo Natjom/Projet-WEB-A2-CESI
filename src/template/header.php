@@ -28,9 +28,7 @@
 
     <!-- Script JavaScript -->
     <script defer src="/script/login.js"></script>
-    <script defer src="/script/menu.js"></script>
     <script defer src="/script/settings.js"></script>
-    <script type="module" src="/script/auth.js"></script>
 
 </head>
 

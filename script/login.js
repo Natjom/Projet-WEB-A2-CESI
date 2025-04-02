@@ -1,72 +1,65 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const loginTrigger = document.querySelector(".login-trigger");
     const loginPanel = document.getElementById("login-panel");
+    const loginButton = document.querySelector(".login-trigger");
     const closeLogin = document.getElementById("close-login");
-    const loginForm = document.getElementById("login-form");
-    const loginError = document.getElementById("login-error");
+    const loginForm = document.getElementById("login-form"); // Formulaire de connexion
+    const loginError = document.getElementById("login-error"); // Zone d'erreur de connexion
 
-    // Afficher ou masquer le panneau de connexion
-    if (loginTrigger) {
-        loginTrigger.addEventListener("click", (e) => {
-            e.preventDefault();
-            loginPanel.classList.toggle("show");
-        });
-    }
 
-    // Fermer le panneau de connexion
-    if (closeLogin) {
-        closeLogin.addEventListener("click", () => {
-            loginPanel.classList.remove("show");
-        });
-    }
+    // Ouvrir / Fermer le panneau au clic sur "Connexion"
+    loginButton.addEventListener("click", function (e) {
+        e.preventDefault(); // Empêche le saut en haut de page
+        loginPanel.classList.toggle("show");
+    });
 
-    // Fermer le panneau si on clique en dehors du panneau de connexion
-    document.addEventListener("click", (e) => {
-        if (!loginPanel.contains(e.target) && !loginTrigger.contains(e.target)) {
+    // Fermer le panneau au clic sur la croix
+    closeLogin.addEventListener("click", function () {
+        loginPanel.classList.remove("show");
+    });
+
+    // Fermer si on clique en dehors
+    document.addEventListener("click", function (e) {
+        if (!loginPanel.contains(e.target) && e.target !== loginButton) {
             loginPanel.classList.remove("show");
         }
     });
 
-    // Soumettre le formulaire de connexion
+
+    // Soumission du formulaire de connexion
     if (loginForm) {
-        loginForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const formData = new FormData(loginForm);
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Empêcher l'envoi traditionnel du formulaire
 
-            console.log("Tentative de connexion avec :", Object.fromEntries(formData));
+            const email = document.querySelector('input[name="email"]').value; // Récupérer l'email
+            const password = document.querySelector('input[name="password"]').value; // Récupérer le mot de passe
 
-            try {
-                const response = await fetch("/SuperStage/src/login/login.php", {
-                    method: "POST",
-                    body: formData,
-                });
+            const data = new FormData(); // Créer un objet FormData pour envoyer les données
+            data.append('email', email);
+            data.append('password', password);
+            data.append('login', 'true'); // Indiquer qu'il s'agit d'une tentative de connexion
 
-                console.log("Statut de la réponse HTTP :", response.status);
-
-                const text = await response.text();  // Récupère la réponse brute
-                console.log("Réponse brute du serveur :", text);
-
-                try {
-                    const data = JSON.parse(text); // Tente de parser en JSON
-                    console.log("Réponse JSON parsée :", data);
-
+            // Faire la requête AJAX vers le fichier PHP qui gère l'authentification
+            fetch('/views/auth.php', {
+                method: 'POST',
+                body: data
+            })
+                .then(response => response.json()) // Réponse en JSON
+                .then(data => {
                     if (data.success) {
-                        console.log("Connexion réussie !");
-                        location.reload();
+                        // Si la connexion réussit, rediriger l'utilisateur
+                        window.location.href = '/SuperStage/index.php';
                     } else {
-                        console.warn("Erreur de connexion :", data.message);
+                        // Afficher un message d'erreur si la connexion échoue
                         loginError.textContent = data.message;
+                        loginError.style.color = "red"; // Afficher en rouge l'erreur
                     }
-                } catch (jsonError) {
-                    console.error("Erreur de parsing JSON :", jsonError);
-                    console.error("Contenu reçu (non JSON) :", text);
-                    loginError.textContent = "Erreur interne du serveur. Veuillez réessayer.";
-                }
-
-            } catch (error) {
-                console.error("Erreur lors de la requête :", error);
-                loginError.textContent = "Erreur lors de la requête. Veuillez réessayer.";
-            }
+                })
+                .catch(error => {
+                    // En cas d'erreur lors de la requête AJAX
+                    console.error('Erreur de connexion:', error);
+                    loginError.textContent = 'Une erreur est survenue, veuillez réessayer plus tard.';
+                    loginError.style.color = "red";
+                });
         });
     }
 });

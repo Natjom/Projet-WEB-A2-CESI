@@ -36,8 +36,7 @@ class Sql
 
         // Connexion à la base de données projetweb
         try {
-            $this->connexion = new PDO("mysql:host=projetweb.ddns.net;dbname=projetweb;port=3366", $user, $password);
-            // Définit le mode d'erreur de PDO pour lancer des exceptions
+            $this->connexion = new PDO("mysql:host=127.0.0.1;dbname=projetweb;port=3306", $user, $password);
             $this->connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         catch(PDOException $e) {
