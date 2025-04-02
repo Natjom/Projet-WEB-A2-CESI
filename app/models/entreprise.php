@@ -10,12 +10,12 @@
     <!-- En-tête de l'entreprise -->
     <div class="entreprise-header">
         <h2 class="nom-entreprise">Nom de l'entreprise</h2>
-        <div class="note-entreprise">★★★★☆ (4.5/5)</div>
+        <div class="note-entreprise">★★★★☆ (4/5)</div>
     </div>
 
 <!--    <div class="entreprise-header">-->
 <!--        <h2 class="nom-entreprise">--><?php //= $entreprise->nom ?><!--</h2>-->
-<!--        <div class="note-entreprise">--><?php //= str_repeat('★', $entreprise->note) ?><!-- (--><?php //= $entreprise->note ?><!--/5)</div>-->
+<!--        <div class="note-entreprise">--><?php //= str_repeat('★', $entreprise->note). str_repeat('☆', 5 - $entreprise->note)?><!-- (--><?php //= $entreprise->note ?><!--/5)</div>-->
 <!--    </div>-->
 
     <!-- Informations principales -->

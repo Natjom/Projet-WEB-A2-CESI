@@ -23,6 +23,7 @@ $offre->instructions = "Envoyez votre CV à contact@entreprise.com";
 <head>
     <link rel="stylesheet" href="/public/assets/css/styles.css">
     <link rel="stylesheet" href="/public/assets/css/offre.css">
+    <link rel="stylesheet" href="/public/assets/css/entreprise.css">
     <link rel="stylesheet" href="/public/assets/css/navbar.css">
     <link rel="stylesheet" href="/public/assets/css/footer.css">
 </head>
@@ -32,7 +33,7 @@ $offre->instructions = "Envoyez votre CV à contact@entreprise.com";
     <!-- En-tête de l'entreprise -->
     <div class="entreprise-header">
         <h2 class="nom-entreprise"><?php echo $entreprise->nom; ?></h2>
-        <div class="note-entreprise"><?php echo str_repeat('★', $entreprise->note) . ' (' . $entreprise->note . '/5)'; ?></div>
+        <div class="note-entreprise"><?php echo str_repeat('★', $entreprise->note) . str_repeat('☆', 5-$entreprise->note).' (' . $entreprise->note . '/5)'; ?></div>
     </div>
 
     <!-- Informations principales -->
