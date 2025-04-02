@@ -22,10 +22,11 @@ $offre->instructions = "Envoyez votre CV à contact@entreprise.com";
 
 <head>
     <link rel="stylesheet" href="/public/assets/css/styles.css">
+    <link rel="stylesheet" href="/public/assets/css/offre.css">
     <link rel="stylesheet" href="/public/assets/css/navbar.css">
     <link rel="stylesheet" href="/public/assets/css/footer.css">
 </head>
-<?php include __DIR__ . "/../template/header.php"; ?>
+<?php include __DIR__ . "/../views/layout/header.php"; ?>
 
 <main class="entreprise-container">
     <!-- En-tête de l'entreprise -->
@@ -98,4 +99,4 @@ $offre->instructions = "Envoyez votre CV à contact@entreprise.com";
     </div>
 </main>
 
-<?php include __DIR__ . "/../template/footer.php"; ?>
+<?php include __DIR__ . "/../views/layout/footer.php"; ?>
