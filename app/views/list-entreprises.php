@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'database/PDO.php'; // Inclut votre classe Sql
+require_once __DIR__ . '/../../database/PDO.php'; // Inclut votre classe Sql
 
 // Déterminez le niveau de sécurité (exemple avec session)
 $securityLevel = $_SESSION['user_role'] ?? 'Etudiant';
