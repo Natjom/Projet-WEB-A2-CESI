@@ -43,4 +43,10 @@ class OffreModel
             $id_entreprise
         ]);
     }
+    public function getOffreById($id) {
+        $query = "SELECT * FROM Offre WHERE IDoffre = ?";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
