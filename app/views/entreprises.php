@@ -1,88 +1,91 @@
+<?php
+session_start();
+require_once __DIR__ . '/../../database/PDO.php'; // Inclut votre classe Sql
 
-<head>
-    <link rel="stylesheet" href="/public/assets/css/styles.css">
-    <link rel="stylesheet" href="/public/assets/css/navbar.css">
-    <link rel="stylesheet" href="/public/assets/css/footer.css">
-</head>
+// Déterminez le niveau de sécurité (exemple avec session)
+$securityLevel = $_SESSION['user_role'] ?? 'Etudiant';
 
-<?php include __DIR__ . "/layout/header.php";
-
-
-require_once __DIR__ . '/../../config/config.php';
-require_once __DIR__ . '/../../app/models/EntrepriseModel.php';
-require_once __DIR__ . '/../../app/controllers/EntrepriseController.php';
-global $pdo;
-$controller = new EntrepriseController(new EntrepriseModel($pdo));
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    switch ($_POST['action']) {
-        case 'ajouter':
-            $controller->ajouter();
-            break;
-        case 'modifier':
-            $controller->modifier($_POST['id']);
-            break;
-        case 'supprimer':
-            $controller->supprimer($_POST['id']);
-            break;
-    }
-}
-
+// Connexion à la base de données
+$db = new Sql($securityLevel);
+$pdo = $db->getConnexion();
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestion des Entreprises</title>
-</head>
-<body>
-<h1>Gestion des Entreprises</h1>
+    <head>
+        <link rel="stylesheet" href="/public/assets/css/styles.css">
+        <link rel="stylesheet" href="/public/assets/css/navbar.css">
+        <link rel="stylesheet" href="/public/assets/css/footer.css">
+        <link rel="stylesheet" href="/public/assets/css/list-entreprises.css">
+        <title>Liste des entreprises</title>
+    </head>
+<?php include __DIR__ . "/../views/layout/header.php"; ?>
 
-<!-- Formulaire de recherche -->
-<form action="entreprises.php" method="GET">
-    <input type="text" name="recherche" placeholder="Rechercher une entreprise">
-    <button type="submit">Rechercher</button>
-</form>
+    <main class="container">
+        <h1>Liste des entreprises</h1>
 
-<!-- Liste des entreprises -->
-<table border="1">
-    <thead>
-    <tr>
-        <th>Nom</th>
-        <th>Description</th>
-        <th>Email</th>
-        <th>Téléphone</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php
-    $entreprises = $controller->liste(); // Récupère toutes les entreprises
-    foreach ($entreprises as $entreprise) {
-        echo '<tr>';
-        echo '<td>' . htmlspecialchars($entreprise['NomE']) . '</td>';
-        echo '<td>' . htmlspecialchars($entreprise['descr']) . '</td>';
-        echo '<td>' . htmlspecialchars($entreprise['MailE']) . '</td>';
-        echo '<td>' . htmlspecialchars($entreprise['TelE']) . '</td>';
-        echo '<td>
-                    <a href="entreprises.php?action=modifier&id=' . $entreprise['IDE'] . '">Modifier</a>
-                    <form action="entreprises.php" method="POST" style="display:inline;">
-                        <input type="hidden" name="action" value="supprimer">
-                        <input type="hidden" name="id" value="' . $entreprise['IDE'] . '">
-                        <button type="submit">Supprimer</button>
-                    </form>
-                </td>';
-        echo '</tr>';
-    }
-    ?>
-    </tbody>
-</table>
+        <!-- Formulaire de recherche -->
+        <form method="GET" class="search-form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+            <label for="search-input">Rechercher une entreprise :</label>
+            <input type="text" id="search-input" name="search" placeholder="Nom ou secteur..."
+                   value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+            <button type="submit">Rechercher</button>
+        </form>
 
-<!-- Formulaire d'ajout -->
-<h2>Ajouter une nouvelle entreprise</h2>
-<form action="entreprises.php" method="POST">
-    <input type="hidden" name="action" value="ajouter">
-    <label for="nom">Nom:</label>
+        <?php
+        // Requête SQL
+        $search = $_GET['search'] ?? '';
+        $params = [];
 
-<?php include __DIR__ . "/layout/footer.php"; ?>
+        $sql = "SELECT 
+                e.IDE AS id,
+                e.NomE AS nom,
+                s.Secteur_Act AS secteur,
+                v.ville AS ville,
+                e.MailE AS contact,
+                e.Site AS site_web
+            FROM Entreprise e
+            JOIN Secteur_activite s ON e.IdSec = s.IdSec
+            JOIN adresse a ON e.ID_adresse = a.ID_adresse
+            JOIN ville v ON a.idv = v.idv";
+
+        if (!empty($search)) {
+            $sql .= " WHERE e.NomE LIKE :search 
+                 OR s.Secteur_Act LIKE :search";
+            $params[':search'] = "%$search%";
+        }
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        $companies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+
+        <!-- Affichage des résultats -->
+        <div class="companies-list">
+            <?php if (!empty($companies)): ?>
+                <?php foreach ($companies as $company): ?>
+                    <div class="company-banner">
+                        <a href="../models/entreprise.php?id=<?= $company['id'] ?>" class="banner-link">
+                            <div class="banner-content">
+                                <!-- Logo (utilisez un chemin réel si disponible) -->
+                                <img src="<?= $company['site_web'] ? $company['site_web'] : 'public/assets/img/icons/favicon-96x96.png' ?>"
+                                     alt="<?= htmlspecialchars($company['nom']) ?>"
+                                     class="company-logo">
+
+                                <div class="text-content">
+                                    <h2><?= htmlspecialchars($company['nom']) ?></h2>
+                                    <div class="details">
+                                        <p><strong>Secteur :</strong> <?= htmlspecialchars($company['secteur']) ?></p>
+                                        <p><strong>Ville :</strong> <?= htmlspecialchars($company['ville']) ?></p>
+                                        <p><strong>Contact :</strong> <?= htmlspecialchars($company['contact']) ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p><?= (!empty($search)) ? "Aucune entreprise trouvée pour : \"{$search}\"" : "Aucune entreprise disponible" ?></p>
+            <?php endif; ?>
+        </div>
+    </main>
+
+<?php include __DIR__ . "/../views/layout/footer.php"; ?>
