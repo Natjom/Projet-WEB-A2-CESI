@@ -4,42 +4,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeLogin = document.getElementById("close-login");
     const loginForm = document.getElementById("login-form");
     const loginError = document.getElementById("login-error");
-    const logoutButton = document.createElement("button");
 
-    logoutButton.textContent = "Déconnexion";
-    logoutButton.id = "logout-button";
-    logoutButton.style.display = "none"; // Caché par défaut
-    logoutButton.addEventListener("click", logout);
+    // Création du menu profil après connexion
+    const profileMenu = document.createElement("div");
+    profileMenu.id = "profile-menu";
+    profileMenu.classList.add("hidden");
+    profileMenu.innerHTML = `
+        <ul>
+            <li><a href="/SuperStage/compte.php">Compte</a></li>
+            <li><button id="logout-button">Déconnexion</button></li>
+        </ul>
+    `;
+    loginButton.parentNode.insertBefore(profileMenu, loginButton.nextSibling);
 
-    loginButton.parentNode.appendChild(logoutButton); // Ajouter le bouton à côté de "Connexion"
-
-
-
-    // Ouvrir / Fermer le panneau au clic sur "Connexion"
+    // Ouvrir / Fermer le panneau de connexion
     loginButton.addEventListener("click", function (e) {
-        e.preventDefault(); // Empêche le saut en haut de page
-        loginPanel.classList.toggle("show");
+        e.preventDefault();
+        if (loginButton.classList.contains("logged-in")) {
+            profileMenu.classList.toggle("show"); // Afficher/Masquer le menu si connecté
+        } else {
+            loginPanel.classList.toggle("show");
+        }
     });
 
-    // Fermer le panneau au clic sur la croix
+    // Fermer le menu si on clique en dehors
+    document.addEventListener("click", function (e) {
+        if (!profileMenu.contains(e.target) && e.target !== loginButton) {
+            profileMenu.classList.remove("show");
+        }
+    });
+
+    // Fermeture de la fenêtre de connexion
     closeLogin.addEventListener("click", function () {
         loginPanel.classList.remove("show");
     });
 
-    // Fermer si on clique en dehors
-    document.addEventListener("click", function (e) {
-        if (!loginPanel.contains(e.target) && e.target !== loginButton) {
-            loginPanel.classList.remove("show");
-        }
-    });
-
-    // Lorsque le formulaire de connexion est soumis
+    // Gestion du formulaire de connexion
     loginForm.addEventListener("submit", async function (e) {
-        e.preventDefault(); // Empêche la soumission normale du formulaire
-
-        // Réinitialise le message d'erreur
+        e.preventDefault();
         loginError.textContent = "";
-        loginError.style.color = "red";
 
         const formData = new FormData(this);
         try {
@@ -51,22 +54,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
 
             if (result.status === "success") {
-                // Connexion réussie
-                loginButton.textContent = result.name;
-                loginButton.classList.add("logged-in");
-                loginPanel.classList.remove("show"); // Cache le panel de connexion
+                setCookie("session_token", result.token, 7);
+                updateUIAfterLogin(result.name);
+                loginPanel.classList.remove("show");
             } else {
-                // Affiche l'erreur sous le formulaire
                 loginError.textContent = result.message;
             }
         } catch (error) {
-            // Si une erreur se produit, on affiche un message générique
             loginError.textContent = "Erreur lors de la connexion.";
         }
     });
 
-
-
+    // Gestion des cookies
     function setCookie(name, value, days) {
         let expires = "";
         if (days) {
@@ -81,42 +80,47 @@ document.addEventListener("DOMContentLoaded", () => {
         let nameEQ = name + "=";
         let ca = document.cookie.split(";");
         for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) == " ") c = c.substring(1, c.length);
+            let c = ca[i].trim();
             if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
         }
         return null;
     }
 
+    // Vérifie si une session est active
     async function checkSession() {
         try {
             const response = await fetch("/SuperStage/app/controllers/CheckSession.php");
             const result = await response.json();
 
             if (result.status === "connected") {
-                loginButton.textContent = result.name;
-                loginButton.classList.add("logged-in");
-                logoutButton.style.display = "inline-block"; // Affiche le bouton déconnexion
-            } else {
-                let token = getCookie("session_token");
-                if (token) {
-                    loginButton.textContent = "Utilisateur (cookie)";
-                    loginButton.classList.add("logged-in");
-                    logoutButton.style.display = "inline-block";
-                }
+                updateUIAfterLogin(result.name);
             }
         } catch (error) {
             console.error("Erreur de vérification de session :", error);
         }
     }
 
-
-    function logout() {
-        document.cookie = "session_token=; Max-Age=0; path=/"; // Supprime le cookie
-        loginButton.textContent = "Connexion";
-        loginButton.classList.remove("logged-in");
-        logoutButton.style.display = "none";
+    // Mise à jour de l'UI après connexion
+    function updateUIAfterLogin(username) {
+        loginButton.textContent = username;
+        loginButton.classList.add("logged-in");
     }
 
+    // Déconnexion
+    function logout() {
+        document.cookie = "session_token=; Max-Age=0; path=/";
+        loginButton.textContent = "Connexion";
+        loginButton.classList.remove("logged-in");
+        profileMenu.classList.add("hidden");
+    }
+
+    // Événement de déconnexion
+    document.addEventListener("click", (e) => {
+        if (e.target.id === "logout-button") {
+            logout();
+        }
+    });
+
+    // Vérification initiale de la session
     checkSession();
 });
