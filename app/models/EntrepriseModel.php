@@ -45,4 +45,11 @@ class EntrepriseModel
         $stmt->execute(['%' . $search . '%', '%' . $search . '%']);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getEntrepriseById($id) {
+        $query = "SELECT * FROM Entreprise WHERE IDE = ?";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
