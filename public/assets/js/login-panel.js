@@ -17,13 +17,18 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     loginButton.parentNode.insertBefore(profileMenu, loginButton.nextSibling);
 
-    // Ouvrir / Fermer le panneau de connexion
+    // Fonction pour afficher ou cacher le menu profil
+    function toggleProfileMenu() {
+        profileMenu.classList.toggle("show");
+    }
+
+    // Ouvrir le panneau de connexion ou le menu profil
     loginButton.addEventListener("click", function (e) {
         e.preventDefault();
         if (loginButton.classList.contains("logged-in")) {
-            profileMenu.classList.toggle("show"); // Afficher/Masquer le menu si connecté
+            toggleProfileMenu(); // Si connecté, ouvrir le menu
         } else {
-            loginPanel.classList.toggle("show");
+            loginPanel.classList.toggle("show"); // Sinon, ouvrir le formulaire de connexion
         }
     });
 
@@ -100,18 +105,27 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+
     // Mise à jour de l'UI après connexion
     function updateUIAfterLogin(username) {
-        loginButton.textContent = username;
-        loginButton.classList.add("logged-in");
+        document.querySelector(".login-wrapper").style.display = "none";
+        document.querySelector(".logout-wrapper").style.display = "block";
+        document.querySelector(".logout-btn").textContent = username;
     }
 
     // Déconnexion
     function logout() {
+        // Supprime le cookie de session
         document.cookie = "session_token=; Max-Age=0; path=/";
-        loginButton.textContent = "Connexion";
-        loginButton.classList.remove("logged-in");
-        profileMenu.classList.add("hidden");
+
+        // Appel au backend pour déconnecter l'utilisateur
+        fetch("/app/controllers/Logout.php")
+            .then(() => {
+                // Cache les éléments liés à la connexion et montre ceux de déconnexion
+                document.querySelector(".login-wrapper").style.display = "block";
+                document.querySelector(".logout-wrapper").style.display = "none";
+            })
+            .catch(error => console.error("Erreur lors de la déconnexion", error));
     }
 
     // Événement de déconnexion

@@ -28,7 +28,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
             $session_token = bin2hex(random_bytes(32));
 
             // On met juste le token dans un cookie local
-            setcookie("session_token", $session_token, time() + 7 * 24 * 3600, "/", "", false, true); // 7 jours
+            setcookie("session_token", $session_token, time() + 7 * 24 * 3600, "/", "", isset($_SERVER['HTTPS']), true);
 
             $response = [
                 "status" => "success",

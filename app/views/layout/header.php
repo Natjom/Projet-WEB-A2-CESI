@@ -43,7 +43,14 @@
         <ul class="nav-links">
             <li><a href="/SuperStage/app/views/offres.php">Offres de stage</a></li>
             <li><a href="/SuperStage/app/views/entreprises.php">Entreprises</a></li>
-            <li class="login-wrapper">
+
+
+            <?php
+            session_start();
+            $isLoggedIn = isset($_SESSION['user']);
+            ?>
+
+            <li class="login-wrapper" <?= $isLoggedIn ? 'style="display: none;"' : '' ?>>
                 <a href="#" class="login-trigger">Connexion</a>
                 <div id="login-panel" class="login-panel hidden">
                     <div class="login-container">
@@ -67,8 +74,14 @@
                 </div>
             </li>
 
-            <li class="logout-wrapper hidden">
-                <a href="#" class="logout-btn">Déconnexion</a>
+            <li class="logout-wrapper" <?= !$isLoggedIn ? 'style="display: none;"' : '' ?>>
+                <a href="#" class="logout-btn"><?= $_SESSION['user']['NomU'] ?? 'Utilisateur' ?></a>
+                <div id="profile-menu" class="hidden">
+                    <ul>
+                        <li><a href="/app/views/compte.php">Compte</a></li>
+                        <li><button id="logout-button">Déconnexion</button></li>
+                    </ul>
+                </div>
             </li>
 
 
