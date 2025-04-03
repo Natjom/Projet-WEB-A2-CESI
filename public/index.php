@@ -1,7 +1,7 @@
 <head>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="stylesheet" href="/assets/css/navbar.css">
-    <link rel="stylesheet" href="/assets/css/footer.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
 <?php include __DIR__ . "/../app/views/layout/header.php"; ?>
 
@@ -9,7 +9,7 @@
     <section class="hero">
         <h1>SuperStage</h1>
         <p>La plateforme qui connecte étudiants et entreprises.</p>
-        <a href="/SuperStage/app/views/offres.php" class="cta-button">Voir les offres</a>
+        <a href="/app/views/offres.php" class="cta-button">Voir les offres</a>
     </section>
 
     <!-- Section Présentation -->

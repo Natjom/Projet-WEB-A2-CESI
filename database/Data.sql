@@ -60,7 +60,7 @@ VALUES
 ('7 Boulevard du Centre', NULL, 1);
 
 INSERT INTO Users (IDu, MdpU, NomU, PrenomU, Date_NaisU, MailU, role, ID_adresse) VALUES
-(1, '12345a', 'Do1e', 'John', '1990-05-15', 'john.doe@gmail.com', 'Etudiant', 1),
+(1, '12345a ', 'Do1e', 'John', '1990-05-15', 'john.doe@gmail.com', 'Etudiant', 1),
 (2, '12345b', 'Smith', 'Alice', '1985-09-21', 'alice.smith@gmail.com', 'Administrateur', 2),
 (3, '12345c', 'Johnson', 'Michael', '1982-03-10', 'michael.johnson@gmail.com', 'Etudiant', 3),
 (4, '12345e', 'Davis', 'Emma', '1995-07-12', 'emma.davis@gmail.com', 'Etudiant', 4),

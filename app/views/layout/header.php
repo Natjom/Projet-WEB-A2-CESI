@@ -49,7 +49,7 @@
                     <div class="login-container">
                         <span id="close-login">&times;</span>
                         <h2>Connexion</h2>
-                        <form id="login-form" method="POST">
+                        <form id="login-form" method="POST" action="/app/controllers/AuthController.php">
                             <label>
                                 <input type="text" name="email" placeholder="Identifiant" required>
                             </label>
@@ -60,12 +60,18 @@
                             <p id="login-error" style="color: red;"></p>
                         </form>
                         <div class="login-links">
-                            <a href="/SuperStage/app/views/forgot-password.php">Mot de passe oublié ?</a>
-                            <a href="/SuperStage/app/views/register.php">Inscription</a>
+                            <a href="/app/views/forgot-password.php">Mot de passe oublié ?</a>
+                            <a href="/app/views/register.php">Inscription</a>
                         </div>
                     </div>
                 </div>
             </li>
+
+            <li class="logout-wrapper hidden">
+                <a href="#" class="logout-btn">Déconnexion</a>
+            </li>
+
+
             <li class="settings-wrapper">
                 <a href="#" class="settings-trigger">
                     <img src="/public/assets/img/icons/param.png" alt="Paramètres" class="settings-icon">

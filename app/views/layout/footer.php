@@ -2,7 +2,7 @@
 // Variables configurables
 $company_name = "SuperStage";
 $current_year = date('Y');
-$home_url = "index.php";
+$home_url = "/SuperStage/public/index.php";
 $logo_path = "/icons/favicon-96x96.png"; // Mettez le chemin de votre logo ici (ex: "images/logo.png")
 $legal_links = [
     '/mentions-legales' => 'Mentions légales',
