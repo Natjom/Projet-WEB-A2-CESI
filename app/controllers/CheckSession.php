@@ -2,22 +2,21 @@
 
 session_start();
 
-$response = ["status" => "disconnected"];
+$response = ["status" => "not_connected"];
 
-if (!empty($_SESSION['id'])) {
+if (isset($_SESSION['id'])) {
     $response = [
         "status" => "connected",
-        "name" => $_SESSION['name'],
-        "role" => $_SESSION['role']
+        "name" => $_SESSION['name']
     ];
-} elseif (!empty($_COOKIE['session_token'])) {
-    // À FAIRE : Vérifier le token en BDD si tu veux le rendre ultra sécurisé
+} elseif (isset($_COOKIE['session_token'])) {
+    // Vérifier localement que le cookie est présent
     $response = [
         "status" => "connected",
-        "name" => "Utilisateur",
-        "role" => "inconnu"
+        "name" => $_COOKIE['session_token'] // Stocke juste le token (mais on peut améliorer)
     ];
 }
 
+header('Content-Type: application/json');
 echo json_encode($response);
 exit();
