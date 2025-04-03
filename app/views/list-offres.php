@@ -1,6 +1,6 @@
 <?php
 session_start(); // Si vous utilisez des sessions pour le rôle
-require 'database/PDO.php'; // Inclut votre classe Sql
+require_once __DIR__.'/../../database/PDO.php'; // Inclut votre classe Sql
 
 // Détermine le niveau de sécurité (exemple avec session)
 // Remplacez par votre logique d'authentification réelle
