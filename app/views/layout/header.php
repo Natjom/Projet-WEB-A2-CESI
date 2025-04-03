@@ -75,14 +75,15 @@
             </li>
 
             <li class="logout-wrapper" <?= !$isLoggedIn ? 'style="display: none;"' : '' ?>>
-                <a href="#" class="logout-btn"><?= $_SESSION['user']['NomU'] ?? 'Utilisateur' ?></a>
+                <a href="/SuperStage/app/views/compte.php" class="logout-btn"><?= $_SESSION['user']['NomU'] ?? 'Utilisateur' ?></a>
                 <div id="profile-menu" class="hidden">
                     <ul>
-                        <li><a href="/app/views/compte.php">Compte</a></li>
+                        <li><a href="/SuperStage/app/views/compte.php">Compte</a></li>
                         <li><button id="logout-button">Déconnexion</button></li>
                     </ul>
                 </div>
             </li>
+
 
 
             <li class="settings-wrapper">

@@ -1,11 +1,10 @@
 <?php
+session_start();  // Démarre la session
+session_destroy();  // Détruit la session active
 
-session_start();
-session_destroy();
-
-// Supprime le cookie côté serveur
+// Supprime le cookie de session
 setcookie("session_token", "", time() - 3600, "/");
 
-header('Content-Type: application/json');
-echo json_encode(["status" => "logged_out"]);
+// Redirection vers la page d'accueil ou login
+header('Location: /SuperStage/public/index.php');  // Redirige vers l'index
 exit();
