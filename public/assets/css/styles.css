@@ -216,53 +216,15 @@ footer {
 .page-content {
     text-align: center;
     padding: 100px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 800px; /* Ajoute une largeur maximale pour mieux centrer les éléments */
-    margin: auto;
 }
 
 .page-content h1 {
     font-size: 2.5rem;
     color: #1e3a8a;
-    margin-bottom: 20px;
 }
 
-.page-content form {
-    width: 100%;
-    max-width: 500px; /* Limite la taille des formulaires */
-    margin: 0 auto;
-}
-
-.page-content label {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.page-content input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.page-content button {
-    width: 100%;
-    padding: 10px;
-    background: #3b82f6;
-    color: white;
-    font-weight: 600;
-    border-radius: 5px;
-    border: none;
-    font-size: 1.1rem;
-    cursor: pointer;
-}
-
-.page-content button:hover {
-    background: #1e3a8a;
+.page-content p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #3b82f6;
 }
