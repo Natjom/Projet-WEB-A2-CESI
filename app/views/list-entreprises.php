@@ -1,6 +1,13 @@
 <?php
-// Suppression de la configuration de la base de données (pour la simulation)
-// $dbHost, $dbName, $dbUser, $dbPass ne sont plus nécessaires
+session_start();
+require 'database/PDO.php'; // Inclut votre classe Sql
+
+// Déterminez le niveau de sécurité (exemple avec session)
+$securityLevel = $_SESSION['user_role'] ?? 'Etudiant';
+
+// Connexion à la base de données
+$db = new Sql($securityLevel);
+$pdo = $db->getConnexion();
 ?>
 
     <head>
@@ -18,107 +25,51 @@
         <!-- Formulaire de recherche -->
         <form method="GET" class="search-form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <label for="search-input">Rechercher une entreprise :</label>
-            <input type="text" id="search-input" name="search" placeholder="Exemple : Nom ou secteur..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+            <input type="text" id="search-input" name="search" placeholder="Nom ou secteur..."
+                   value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
             <button type="submit">Rechercher</button>
         </form>
 
         <?php
-        // Simulation des données (remplace la base de données)
-        $companies = [
-            [
-                'id' => 1,
-                'nom' => 'Entreprise Tech',
-                'secteur' => 'Technologie',
-                'ville' => 'Paris',
-                'contact' => 'contact@tech.com',
-                'logo' => '/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Agro Solutions',
-                'secteur' => 'Agriculture',
-                'ville' => 'Lyon',
-                'contact' => 'contact@agro.fr',
-                'logo' => '/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Voyages Monde',
-                'secteur' => 'Tourisme',
-                'ville' => 'Marseille',
-                'contact' => 'contact@voyages.com',
-                'logo' => '/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Conseil Stratégique',
-                'secteur' => 'Consulting',
-                'ville' => 'Nantes',
-                'contact' => 'contact@conseil.fr',
-                'logo' => '/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Conseil Stratégique',
-                'secteur' => 'Consulting',
-                'ville' => 'Nantes',
-                'contact' => 'contact@conseil.fr',
-                'logo' => '/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Conseil Stratégique',
-                'secteur' => 'Consulting',
-                'ville' => 'Nantes',
-                'contact' => 'contact@conseil.fr',
-                'logo' => '/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Conseil Stratégique blabalbablabalballablablal',
-                'secteur' => 'Consulting',
-                'ville' => 'Nantes',
-                'contact' => 'contact@conseil.fr',
-                'logo' => '/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Conseil Stratégique',
-                'secteur' => 'Consulting',
-                'ville' => 'Nantes',
-                'contact' => 'contact@conseil.fr',
-                'logo' => '/icons/favicon-96x96.png'
-            ],
-        ];
-
-        // Récupération du terme de recherche
+        // Requête SQL
         $search = $_GET['search'] ?? '';
+        $params = [];
 
-        // Filtrage des entreprise (simulation de la requête SQL)
+        $sql = "SELECT 
+                e.IDE AS id,
+                e.NomE AS nom,
+                s.Secteur_Act AS secteur,
+                v.ville AS ville,
+                e.MailE AS contact,
+                e.Site AS site_web
+            FROM Entreprise e
+            JOIN Secteur_activite s ON e.IdSec = s.IdSec
+            JOIN adresse a ON e.ID_adresse = a.ID_adresse
+            JOIN ville v ON a.idv = v.idv";
+
         if (!empty($search)) {
-            $searchTerm = '%' . $search . '%';
-            $filteredCompanies = array_filter($companies, function ($company) use ($searchTerm) {
-                return stripos($company['nom'], $search) !== false
-                    || stripos($company['secteur'], $search) !== false;
-            });
-        } else {
-            $filteredCompanies = $companies;
+            $sql .= " WHERE e.NomE LIKE :search 
+                 OR s.Secteur_Act LIKE :search";
+            $params[':search'] = "%$search%";
         }
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        $companies = $stmt->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
         <!-- Affichage des résultats -->
-        <?php if (!empty($filteredCompanies)): ?>
-            <div class="companies-list">
-                <?php foreach ($filteredCompanies as $company): ?>
+        <div class="companies-list">
+            <?php if (!empty($companies)): ?>
+                <?php foreach ($companies as $company): ?>
                     <div class="company-banner">
-                        <a href="../models/entreprise.php?id=<?= htmlspecialchars($company['id']) ?>" class="banner-link">
+                        <a href="../models/entreprise.php?id=<?= $company['id'] ?>" class="banner-link">
                             <div class="banner-content">
-                                <!-- Logo à gauche -->
-                                <img src="<?= htmlspecialchars($company['logo']) ?>"
+                                <!-- Logo (utilisez un chemin réel si disponible) -->
+                                <img src="<?= $company['site_web'] ? $company['site_web'] : 'public/assets/img/icons/favicon-96x96.png' ?>"
                                      alt="<?= htmlspecialchars($company['nom']) ?>"
                                      class="company-logo">
 
-                                <!-- Contenu texte -->
                                 <div class="text-content">
                                     <h2><?= htmlspecialchars($company['nom']) ?></h2>
                                     <div class="details">
@@ -131,15 +82,10 @@
                         </a>
                     </div>
                 <?php endforeach; ?>
-            </div>
-        <?php else: ?>
-            <!-- Message d'erreur inchangé -->
-            <?php if (!empty($search)): ?>
-                <p>Aucune entreprise trouvée pour la recherche...</p>
             <?php else: ?>
-                <p>Aucune entreprise disponible.</p>
+                <p><?= (!empty($search)) ? "Aucune entreprise trouvée pour : \"{$search}\"" : "Aucune entreprise disponible" ?></p>
             <?php endif; ?>
-        <?php endif; ?>
+        </div>
     </main>
 
 <?php include __DIR__ . "/../views/layout/footer.php"; ?>
