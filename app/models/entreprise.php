@@ -1,7 +1,7 @@
 <?php
 // Configuration de la base de données
+global $user, $pdo;
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=nom_de_votre_base', 'utilisateur', 'mot_de_passe');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Échec de la connexion : " . $e->getMessage());
