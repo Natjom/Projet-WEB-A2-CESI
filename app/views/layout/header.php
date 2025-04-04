@@ -51,7 +51,7 @@
             <?php if ($_SESSION['role'] == 'Pilote'): ?>
                 <li><a href="/SuperStage/app/views/dashboard.php">Dashboard</a></li>
             <?php elseif ($_SESSION['role'] == 'Administrateur'): ?>
-                <li><a href="/SuperStage/app/views/administration.php">Administration</a></li>
+                <li><a href="/SuperStage/app/views/dashboardAdmin.php">Administration</a></li>
             <?php endif; ?>
 
             <li class="login-wrapper" <?= $isLoggedIn ? 'style="display: none;"' : '' ?>>
@@ -126,8 +126,8 @@
     <!-- Menu déroulant -->
     <div class="menu">
         <ul>
-            <li><a href="/app/views/offres.php">Offres de stage</a></li>
-            <li><a href="/app/views/entreprises.php">Entreprises</a></li>
+            <li><a href="/app/views/entreprises.php">Offres de stage</a></li>
+            <li><a href="/app/views/offres.php">Entreprises</a></li>
             <li><a href="#" class="login-trigger">Connexion</a></li>
             <?php if ($isLoggedIn): ?>
                 <?php if ($_SESSION['role'] == 'Pilote'): ?>

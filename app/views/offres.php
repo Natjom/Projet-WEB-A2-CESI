@@ -1,145 +1,97 @@
 <?php
-// Suppression de la configuration de la base de données (pour la simulation)
-// $dbHost, $dbName, $dbUser, $dbPass ne sont plus nécessaires
+// Connexion à la base de données (PDO)
+global $pdo;
+session_start();
+require_once(__DIR__ . "/../../config/config.php"); // Assure-toi d'avoir ta connexion ici
+
+// Récupération du terme de recherche
+$search = $_GET['search'] ?? '';
+
+// Préparer la requête pour récupérer les offres de stage
+$sql = "SELECT O.IDoffre, O.Poste, O.remune, O.Date_debutO, O.Date_finO, O.Nb_place, O.Descr, 
+                E.NomE, E.MailE, E.Site, S.Secteur_Act
+        FROM Offre O
+        LEFT JOIN Entreprise E ON O.IDE = E.IDE
+        LEFT JOIN Secteur_activite S ON E.IdSec = S.IdSec
+        WHERE O.Poste LIKE :search OR S.Secteur_Act LIKE :search
+        ORDER BY O.Date_debutO ASC"; // Trier par date de début du stage
+
+// Préparer la requête
+$stmt = $pdo->prepare($sql);
+
+// Lier le paramètre de recherche à la requête
+$searchTerm = '%' . $search . '%';
+$stmt->bindParam(':search', $searchTerm, PDO::PARAM_STR);
+
+// Exécuter la requête
+$stmt->execute();
+
+// Récupérer les résultats
+$stages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-    <head>
-        <link rel="stylesheet" href="/public/assets/css/styles.css">
-        <link rel="stylesheet" href="/public/assets/css/navbar.css">
-        <link rel="stylesheet" href="/public/assets/css/footer.css">
-        <link rel="stylesheet" href="/public/assets/css/list-entreprises.css">
-        <title>Liste des offres de stage</title>
-    </head>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="/public/assets/css/styles.css">
+    <link rel="stylesheet" href="/public/assets/css/navbar.css">
+    <link rel="stylesheet" href="/public/assets/css/footer.css">
+    <link rel="stylesheet" href="/public/assets/css/list-entreprises.css">
+    <title>Liste des offres de stage</title>
+</head>
+<body>
+
 <?php include __DIR__ . "/../views/layout/header.php"; ?>
 
-    <main class="container">
-        <h1>Liste des entreprises</h1>
+<main class="container">
+    <h1>Liste des offres de stage</h1>
 
-        <!-- Formulaire de recherche -->
-        <form method="GET" class="search-form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-            <label for="search-input">Rechercher une entreprise :</label>
-            <input type="text" id="search-input" name="search" placeholder="Exemple : Nom ou secteur..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
-            <button type="submit">Rechercher</button>
-        </form>
+    <!-- Formulaire de recherche -->
+    <form method="GET" class="search-form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+        <label for="search-input">Rechercher un stage :</label>
+        <input type="text" id="search-input" name="search" placeholder="Exemple : Poste ou secteur..." value="<?= htmlspecialchars($search) ?>">
+        <button type="submit">Rechercher</button>
+    </form>
 
-        <?php
-        // Simulation des données (remplace la base de données)
-        $companies = [
-            [
-                'id' => 1,
-                'nom' => 'Entreprise Tech',
-                'secteur' => 'Technologie',
-                'ville' => 'Paris',
-                'contact' => 'contact@tech.com',
-                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Agro Solutions',
-                'secteur' => 'Agriculture',
-                'ville' => 'Lyon',
-                'contact' => 'contact@agro.fr',
-                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Voyages Monde',
-                'secteur' => 'Tourisme',
-                'ville' => 'Marseille',
-                'contact' => 'contact@voyages.com',
-                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Conseil Stratégique',
-                'secteur' => 'Consulting',
-                'ville' => 'Nantes',
-                'contact' => 'contact@conseil.fr',
-                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Conseil Stratégique',
-                'secteur' => 'Consulting',
-                'ville' => 'Nantes',
-                'contact' => 'contact@conseil.fr',
-                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Conseil Stratégique',
-                'secteur' => 'Consulting',
-                'ville' => 'Nantes',
-                'contact' => 'contact@conseil.fr',
-                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Conseil Stratégique blabalbablabalballablablal',
-                'secteur' => 'Consulting',
-                'ville' => 'Nantes',
-                'contact' => 'contact@conseil.fr',
-                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
-            ],
-            [
-                'id' => 1,
-                'nom' => 'Conseil Stratégique',
-                'secteur' => 'Consulting',
-                'ville' => 'Nantes',
-                'contact' => 'contact@conseil.fr',
-                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
-            ],
-        ];
+    <!-- Affichage des offres de stage -->
+    <?php if (!empty($stages)): ?>
+        <div class="companies-list">
+            <?php foreach ($stages as $stage): ?>
+                <div class="companies-banner">
+                    <a href="../models/offre.php?id=<?= htmlspecialchars($stage['IDoffre']) ?>" class="banner-link">
+                        <div class="banner-content">
+                            <!-- Logo de l'entreprise -->
+                            <img src="/../../public/assets/img/icons/favicon-96x96.png" alt="<?= htmlspecialchars($stage['NomE']) ?>" class="company-logo">
 
-        // Récupération du terme de recherche
-        $search = $_GET['search'] ?? '';
-
-        // Filtrage des entreprise (simulation de la requête SQL)
-        if (!empty($search)) {
-            $searchTerm = '%' . $search . '%';
-            $filteredCompanies = array_filter($companies, function ($company) use ($searchTerm) {
-                return stripos($company['nom'], $search) !== false
-                    || stripos($company['secteur'], $search) !== false;
-            });
-        } else {
-            $filteredCompanies = $companies;
-        }
-        ?>
-
-        <!-- Affichage des résultats -->
-        <?php if (!empty($filteredCompanies)): ?>
-            <div class="companies-list">
-                <?php foreach ($filteredCompanies as $company): ?>
-                    <div class="company-banner">
-                        <a href="../models/entreprise.php?id=<?= htmlspecialchars($company['id']) ?>" class="banner-link">
-                            <div class="banner-content">
-                                <!-- Logo à gauche -->
-                                <img src="<?= htmlspecialchars($company['logo']) ?>"
-                                     alt="<?= htmlspecialchars($company['nom']) ?>"
-                                     class="company-logo">
-
-                                <!-- Contenu texte -->
-                                <div class="text-content">
-                                    <h2><?= htmlspecialchars($company['nom']) ?></h2>
-                                    <div class="details">
-                                        <p><strong>Secteur :</strong> <?= htmlspecialchars($company['secteur']) ?></p>
-                                        <p><strong>Ville :</strong> <?= htmlspecialchars($company['ville']) ?></p>
-                                        <p><strong>Contact :</strong> <?= htmlspecialchars($company['contact']) ?></p>
-                                    </div>
-                                </div>
+                            <!-- Contenu texte de l'offre de stage -->
+                            <div class="text-content">
+                                <h2><?= htmlspecialchars($stage['Poste']) ?></h2>
+                                <p><strong>Entreprise :</strong> <?= htmlspecialchars($stage['NomE']) ?></p>
+                                <p><strong>Secteur :</strong> <?= htmlspecialchars($stage['Secteur_Act']) ?></p>
+                                <p><strong>Contact :</strong> <?= htmlspecialchars($stage['MailE']) ?></p>
+                                <p><strong>Site web :</strong> <a href="<?= htmlspecialchars($stage['Site']) ?>" target="_blank"><?= htmlspecialchars($stage['Site']) ?></a></p>
+                                <p><strong>Rémunération :</strong> <?= htmlspecialchars($stage['remune']) ?>€</p>
+                                <p><strong>Date de début :</strong> <?= htmlspecialchars($stage['Date_debutO']) ?></p>
+                                <p><strong>Date de fin :</strong> <?= htmlspecialchars($stage['Date_finO']) ?></p>
+                                <p><strong>Places disponibles :</strong> <?= htmlspecialchars($stage['Nb_place']) ?></p>
                             </div>
-                        </a>
+                        </div>
+                    </a>
+
+                    <!-- Affichage de la description de l'offre -->
+                    <div class="stage-description">
+                        <p><strong>Description :</strong> <?= htmlspecialchars($stage['Descr']) ?></p>
                     </div>
-                <?php endforeach; ?>
-            </div>
-        <?php else: ?>
-            <!-- Message d'erreur inchangé -->
-            <?php if (!empty($search)): ?>
-                <p>Aucune entreprise trouvée pour la recherche...</p>
-            <?php else: ?>
-                <p>Aucune entreprise disponible.</p>
-            <?php endif; ?>
-        <?php endif; ?>
-    </main>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php else: ?>
+        <!-- Message si aucune offre de stage n'a été trouvée -->
+        <p>Aucun stage trouvé pour cette recherche.</p>
+    <?php endif; ?>
+</main>
 
 <?php include __DIR__ . "/../views/layout/footer.php"; ?>
+
+</body>
+</html>
