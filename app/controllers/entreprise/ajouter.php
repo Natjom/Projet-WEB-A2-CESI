@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../../models/EntrepriseModel.php';
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=nom_de_votre_base', 'utilisateur', 'mot_de_passe');
+    global $pdo;
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Échec de la connexion : " . $e->getMessage());
