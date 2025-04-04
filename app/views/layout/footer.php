@@ -26,8 +26,8 @@ $legal_links = [
             <?php
             $nav_links = [
                 'Accueil' => "$home_url",
-                'Trouver un stage' => "entreprises.php",
-                'Entreprises' => "entreprise.php",
+                'Trouver un stage' => "/SuperStage/app/views/offres.php",
+                'Entreprises' => "/SuperStage/app/views/entreprises.php",
                 'Support' => "help.php",
             ];
 
@@ -39,7 +39,7 @@ $legal_links = [
 
         <!-- Section Authentification -->
         <div class="footer-section auth-section">
-            <a href="register.php" class="auth-button">Inscription</a>
+            <a href="/SuperStage/app/views/register.php" class="auth-button">Inscription</a>
             <a href="login.php" class="auth-button">Se connecter</a>
         </div>
     </div>
