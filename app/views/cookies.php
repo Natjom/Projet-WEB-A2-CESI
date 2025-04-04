@@ -10,8 +10,8 @@ if (!isset($_SESSION['role'])) {
 <head>
     <meta charset="UTF-8">
     <title>Cookies - SuperStage</title>
-    <link rel="stylesheet" href="/public/assets/css/styles.css">
-    <link rel="stylesheet" href="/public/assets/css/responsive.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/responsive.css">
 </head>
 <body>
     <?php include __DIR__ . "/../../src/template/header.php"; ?>

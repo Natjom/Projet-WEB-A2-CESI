@@ -1,20 +1,14 @@
-<?php
-session_start();
-if (!isset($_SESSION['role'])) {
-    $_SESSION['role'] = 'Anonyme';
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>RGPD - SuperStage</title>
-    <link rel="stylesheet" href="/public/assets/css/styles.css">
-    <link rel="stylesheet" href="/public/assets/css/responsive.css">
+    <link rel="stylesheet" href="/public/assets/css/legal.css">
+    <link rel="stylesheet" href="/public/assets/css/navbar.css">
+    <link rel="stylesheet" href="/public/assets/css/footer.css">
 </head>
 <body>
-    <?php include __DIR__ . "/../../src/template/header.php"; ?>
+    <?php include __DIR__ . "/layout/header.php"; ?>
 
     <main class="page-content">
         <h1>Politique de confidentialité (RGPD)</h1>
@@ -46,6 +40,6 @@ if (!isset($_SESSION['role'])) {
         </section>
     </main>
 
-    <?php include __DIR__ . "/../../src/template/footer.php"; ?>
+    <?php include __DIR__ . "/layout/footer.php"; ?>
 </body>
 </html>

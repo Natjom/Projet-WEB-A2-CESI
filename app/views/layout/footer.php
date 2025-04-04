@@ -5,8 +5,8 @@ $current_year = date('Y');
 $home_url = "/SuperStage/public/index.php";
 $logo_path = "/icons/favicon-96x96.png"; // Mettez le chemin de votre logo ici (ex: "images/logo.png")
 $legal_links = [
-    '/mentions-legales' => 'Mentions légales',
-    '/politique-confidentialite' => 'Politique de confidentialité'
+    '/SuperStage/app/views/mentions-legales.php' => 'Mentions légales',
+    '/SuperStage/app/views/rgpd.php' => 'Politique de confidentialité'
 ];
 ?>
 <footer class="custom-footer">
