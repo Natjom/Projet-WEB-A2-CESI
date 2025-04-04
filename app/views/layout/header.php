@@ -37,18 +37,22 @@
 
 <header>
     <nav class="navbar">
-            <div class="logo"><a href="/SuperStage/public/index.php">SuperStage</a></div>
-<!--        <div class="logo"><a href="index.php">SuperStage</a></div>-->
+        <div class="logo"><a href="/SuperStage/public/index.php">SuperStage</a></div>
         <!-- Navbar classique pour PC -->
         <ul class="nav-links">
             <li><a href="/SuperStage/app/views/offres.php">Offres de stage</a></li>
             <li><a href="/SuperStage/app/views/entreprises.php">Entreprises</a></li>
 
-
             <?php
             session_start();
             $isLoggedIn = isset($_SESSION['user']);
             ?>
+
+            <?php if ($_SESSION['role'] == 'Pilote'): ?>
+                <li><a href="/SuperStage/app/views/dashboard.php">Dashboard</a></li>
+            <?php elseif ($_SESSION['role'] == 'Administrateur'): ?>
+                <li><a href="/SuperStage/app/views/administration.php">Administration</a></li>
+            <?php endif; ?>
 
             <li class="login-wrapper" <?= $isLoggedIn ? 'style="display: none;"' : '' ?>>
                 <a href="#" class="login-trigger">Connexion</a>
@@ -83,8 +87,6 @@
                     </ul>
                 </div>
             </li>
-
-
 
             <li class="settings-wrapper">
                 <a href="#" class="settings-trigger">
@@ -127,7 +129,15 @@
             <li><a href="/app/views/offres.php">Offres de stage</a></li>
             <li><a href="/app/views/entreprises.php">Entreprises</a></li>
             <li><a href="#" class="login-trigger">Connexion</a></li>
+            <?php if ($isLoggedIn): ?>
+                <?php if ($_SESSION['role'] == 'Pilote'): ?>
+                    <li><a href="/SuperStage/app/views/dashboard.php">Dashboard</a></li>
+                <?php elseif ($_SESSION['role'] == 'Administrateur'): ?>
+                    <li><a href="/SuperStage/app/views/administration.php">Administration</a></li>
+                <?php endif; ?>
+            <?php endif; ?>
         </ul>
     </div>
 </header>
+
 

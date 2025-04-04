@@ -62,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setCookie("session_token", result.token, 7);
                 updateUIAfterLogin(result.name);
                 loginPanel.classList.remove("show");
+                location.reload(true);
             } else {
                 loginError.textContent = result.message;
             }

@@ -2,6 +2,7 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/footer.css">
+
 </head>
 <?php include __DIR__ . "/../app/views/layout/header.php"; ?>
 
