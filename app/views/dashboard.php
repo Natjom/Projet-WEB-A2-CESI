@@ -35,7 +35,9 @@ $offres = $controller->getOffres();
     <section class="page-content">
         <h1>Dashboard</h1>
 
+        <!-- Bouton Ajouter pour les entreprises -->
         <h2>Entreprises</h2>
+        <a href="/SuperStage/app/controllers/addEntreprise.php" class="cta-button">Ajouter une Entreprise</a>
         <table>
             <thead>
             <tr>
@@ -68,7 +70,9 @@ $offres = $controller->getOffres();
             </tbody>
         </table>
 
+        <!-- Bouton Ajouter pour les offres -->
         <h2>Offres de Stage</h2>
+        <a href="/SuperStage/app/controllers/addOffre.php" class="cta-button">Ajouter une Offre</a>
         <table>
             <thead>
             <tr>
@@ -96,6 +100,7 @@ $offres = $controller->getOffres();
         </table>
     </section>
 </main>
+
 
 <?php include __DIR__ . "/layout/footer.php"; ?>
 
