@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/public/assets/css/navbar.css">
         <link rel="stylesheet" href="/public/assets/css/footer.css">
         <link rel="stylesheet" href="/public/assets/css/list-entreprises.css">
-        <title>Liste des entreprises</title>
+        <title>Liste des offres de stage</title>
     </head>
 <?php include __DIR__ . "/../views/layout/header.php"; ?>
 
