@@ -9,7 +9,7 @@
     <section class="hero">
         <h1>SuperStage</h1>
         <p>La plateforme qui connecte étudiants et entreprises.</p>
-        <a href="/app/views/offres.php" class="cta-button">Voir les offres</a>
+        <a href="/SuperStage/app/views/offres.php" class="cta-button">Voir les offres</a>
     </section>
 
     <!-- Section Présentation -->
