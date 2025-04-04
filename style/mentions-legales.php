@@ -16,7 +16,7 @@ if (!isset($_SESSION['role'])) {
     <link rel="stylesheet" href="/public/assets/css/responsive.css">
 </head>
 <body>
-    <?php include __DIR__ . "/../../views/layout/header.php"; ?>
+    <?php include __DIR__ . "/../../src/template/header.php"; ?>
 
     <main class="page-content">
         <h1>Mentions légales</h1>
@@ -87,6 +87,6 @@ if (!isset($_SESSION['role'])) {
         </section>
     </main>
 
-    <?php include __DIR__ . "/../../views/layout/footer.php"; ?>
+    <?php include __DIR__ . "/../../src/template/footer.php"; ?>
 </body>
 </html>
