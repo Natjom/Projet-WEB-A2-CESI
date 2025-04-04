@@ -67,8 +67,8 @@
                             <p id="login-error" style="color: red;"></p>
                         </form>
                         <div class="login-links">
-                            <a href="/app/views/forgot-password.php">Mot de passe oublié ?</a>
-                            <a href="/app/views/register.php">Inscription</a>
+                            <a href="/SuperStage/app/views/forgot-password.php">Mot de passe oublié ?</a>
+                            <a href="/SuperStage/app/views/register.php">Inscription</a>
                         </div>
                     </div>
                 </div>
