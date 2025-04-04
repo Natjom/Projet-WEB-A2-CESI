@@ -1,20 +1,145 @@
-<head>
-    <link rel="stylesheet" href="/public/assets/css/styles.css">
-    <link rel="stylesheet" href="/public/assets/css/navbar.css">
-    <link rel="stylesheet" href="/public/assets/css/footer.css">
-</head>
-<?php include __DIR__ . "/layout/header.php"; ?>
+<?php
+// Suppression de la configuration de la base de données (pour la simulation)
+// $dbHost, $dbName, $dbUser, $dbPass ne sont plus nécessaires
+?>
 
+    <head>
+        <link rel="stylesheet" href="/public/assets/css/styles.css">
+        <link rel="stylesheet" href="/public/assets/css/navbar.css">
+        <link rel="stylesheet" href="/public/assets/css/footer.css">
+        <link rel="stylesheet" href="/public/assets/css/list-entreprises.css">
+        <title>Liste des entreprises</title>
+    </head>
+<?php include __DIR__ . "/../views/layout/header.php"; ?>
 
-<p>
-    Lorem ipsum dolor sit amet,<br>
-    consectetur adipiscing elit.<br>
-    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>
-    Ut enim ad minim veniam,<br>
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br>
-    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<br>
-    Excepteur sint occaecat cupidatat non proident,<br>
-    sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+    <main class="container">
+        <h1>Liste des entreprises</h1>
 
-<?php include __DIR__ . "/layout/footer.php"; ?>
+        <!-- Formulaire de recherche -->
+        <form method="GET" class="search-form" action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+            <label for="search-input">Rechercher une entreprise :</label>
+            <input type="text" id="search-input" name="search" placeholder="Exemple : Nom ou secteur..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+            <button type="submit">Rechercher</button>
+        </form>
+
+        <?php
+        // Simulation des données (remplace la base de données)
+        $companies = [
+            [
+                'id' => 1,
+                'nom' => 'Entreprise Tech',
+                'secteur' => 'Technologie',
+                'ville' => 'Paris',
+                'contact' => 'contact@tech.com',
+                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
+            ],
+            [
+                'id' => 1,
+                'nom' => 'Agro Solutions',
+                'secteur' => 'Agriculture',
+                'ville' => 'Lyon',
+                'contact' => 'contact@agro.fr',
+                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
+            ],
+            [
+                'id' => 1,
+                'nom' => 'Voyages Monde',
+                'secteur' => 'Tourisme',
+                'ville' => 'Marseille',
+                'contact' => 'contact@voyages.com',
+                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
+            ],
+            [
+                'id' => 1,
+                'nom' => 'Conseil Stratégique',
+                'secteur' => 'Consulting',
+                'ville' => 'Nantes',
+                'contact' => 'contact@conseil.fr',
+                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
+            ],
+            [
+                'id' => 1,
+                'nom' => 'Conseil Stratégique',
+                'secteur' => 'Consulting',
+                'ville' => 'Nantes',
+                'contact' => 'contact@conseil.fr',
+                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
+            ],
+            [
+                'id' => 1,
+                'nom' => 'Conseil Stratégique',
+                'secteur' => 'Consulting',
+                'ville' => 'Nantes',
+                'contact' => 'contact@conseil.fr',
+                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
+            ],
+            [
+                'id' => 1,
+                'nom' => 'Conseil Stratégique blabalbablabalballablablal',
+                'secteur' => 'Consulting',
+                'ville' => 'Nantes',
+                'contact' => 'contact@conseil.fr',
+                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
+            ],
+            [
+                'id' => 1,
+                'nom' => 'Conseil Stratégique',
+                'secteur' => 'Consulting',
+                'ville' => 'Nantes',
+                'contact' => 'contact@conseil.fr',
+                'logo' => '/../../public/assets/img/icons/favicon-96x96.png'
+            ],
+        ];
+
+        // Récupération du terme de recherche
+        $search = $_GET['search'] ?? '';
+
+        // Filtrage des entreprise (simulation de la requête SQL)
+        if (!empty($search)) {
+            $searchTerm = '%' . $search . '%';
+            $filteredCompanies = array_filter($companies, function ($company) use ($searchTerm) {
+                return stripos($company['nom'], $search) !== false
+                    || stripos($company['secteur'], $search) !== false;
+            });
+        } else {
+            $filteredCompanies = $companies;
+        }
+        ?>
+
+        <!-- Affichage des résultats -->
+        <?php if (!empty($filteredCompanies)): ?>
+            <div class="companies-list">
+                <?php foreach ($filteredCompanies as $company): ?>
+                    <div class="company-banner">
+                        <a href="../models/entreprise.php?id=<?= htmlspecialchars($company['id']) ?>" class="banner-link">
+                            <div class="banner-content">
+                                <!-- Logo à gauche -->
+                                <img src="<?= htmlspecialchars($company['logo']) ?>"
+                                     alt="<?= htmlspecialchars($company['nom']) ?>"
+                                     class="company-logo">
+
+                                <!-- Contenu texte -->
+                                <div class="text-content">
+                                    <h2><?= htmlspecialchars($company['nom']) ?></h2>
+                                    <div class="details">
+                                        <p><strong>Secteur :</strong> <?= htmlspecialchars($company['secteur']) ?></p>
+                                        <p><strong>Ville :</strong> <?= htmlspecialchars($company['ville']) ?></p>
+                                        <p><strong>Contact :</strong> <?= htmlspecialchars($company['contact']) ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <!-- Message d'erreur inchangé -->
+            <?php if (!empty($search)): ?>
+                <p>Aucune entreprise trouvée pour la recherche...</p>
+            <?php else: ?>
+                <p>Aucune entreprise disponible.</p>
+            <?php endif; ?>
+        <?php endif; ?>
+    </main>
+
+<?php include __DIR__ . "/../views/layout/footer.php"; ?>
