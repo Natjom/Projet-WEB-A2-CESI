@@ -110,3 +110,48 @@ if (!$user) {
 </main>
 
 <?php include __DIR__ . "/layout/footer.php"; ?>
+
+<script>
+    document.getElementById("update-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const payload = {
+            name: document.getElementById("name").value,
+            surname: document.getElementById("surname").value,
+            email: document.getElementById("email").value,
+            birthdate: document.getElementById("birthdate").value,
+        };
+
+        try {
+            const response = await fetch("/SuperStage/app/controllers/UpdateProfile.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const text = await response.text();
+            let result;
+
+            try {
+                result = JSON.parse(text);
+            } catch (e) {
+                console.error("Réponse du serveur non-JSON :", text);
+                alert("Erreur inattendue du serveur.");
+                return;
+            }
+
+            if (result.status === "success") {
+                alert("Profil mis à jour avec succès !");
+            } else {
+                alert("Erreur : " + result.message);
+            }
+
+        } catch (err) {
+            alert("Une erreur est survenue lors de la mise à jour.");
+            console.error(err);
+        }
+    });
+</script>
+
